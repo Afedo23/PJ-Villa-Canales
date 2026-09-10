@@ -53,6 +53,17 @@ function crearTestimonio(t) {
     campamento.fotos.forEach((foto, i) =>
       pistaFotos.appendChild(crearFoto(foto, `Foto ${i + 1} de ${campamento.nombre}`))
     );
+    if (campamento.fotos.length > 1) {
+      const controles = document.getElementById("controlesFotos");
+      controles.style.display = "flex";
+      const anchoPaso = () => pistaFotos.firstElementChild.getBoundingClientRect().width + 14;
+      document.getElementById("fotoAnterior").addEventListener("click", () => {
+        pistaFotos.scrollBy({ left: -anchoPaso(), behavior: "smooth" });
+      });
+      document.getElementById("fotoSiguiente").addEventListener("click", () => {
+        pistaFotos.scrollBy({ left: anchoPaso(), behavior: "smooth" });
+      });
+    }
   }
 
   // Testimonios propios de este campamento
@@ -74,4 +85,16 @@ function crearTestimonio(t) {
       a.textContent = c.anio;
       selector.appendChild(a);
     });
+
+  // Revelado suave al hacer scroll
+  const elementos = document.querySelectorAll(".revelar");
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach(entrada => {
+      if (entrada.isIntersecting) {
+        entrada.target.classList.add("visible");
+        observador.unobserve(entrada.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  elementos.forEach(el => observador.observe(el));
 })();

@@ -33,6 +33,150 @@ function crearTarjetaTestimonio(testimonio) {
   return div;
 }
 
+// --- Fogata: brasas que suben en el hero (un solo efecto protagonista) ---
+function crearBrasas() {
+  const contenedor = document.getElementById("contenedorBrasas");
+  if (!contenedor) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const cantidad = window.innerWidth < 700 ? 10 : 18;
+  for (let i = 0; i < cantidad; i++) {
+    const brasa = document.createElement("span");
+    brasa.className = "brasa";
+    brasa.style.left = `${5 + Math.random() * 90}%`;
+    brasa.style.setProperty("--deriva", `${Math.random() * 60 - 30}px`);
+    brasa.style.animationDuration = `${5 + Math.random() * 5}s`;
+    brasa.style.animationDelay = `${Math.random() * 8}s`;
+    contenedor.appendChild(brasa);
+  }
+}
+
+// --- Franja de estadísticas con conteo ascendente ---
+function iniciarStats(estadisticas) {
+  const franja = document.getElementById("franjaStats");
+  if (!franja || !estadisticas || estadisticas.length === 0) return;
+  estadisticas.forEach(stat => {
+    const item = document.createElement("div");
+    item.className = "stat-item";
+    const soloDigitos = parseInt(stat.numero.replace(/\D/g, ""), 10);
+    item.innerHTML = `<div class="stat-numero" data-final="${soloDigitos || 0}" data-sufijo="${stat.numero.replace(/[0-9]/g, "")}">0</div><div class="stat-etiqueta">${stat.etiqueta}</div>`;
+    franja.appendChild(item);
+  });
+
+  const numeros = franja.querySelectorAll(".stat-numero");
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach(entrada => {
+      if (!entrada.isIntersecting) return;
+      numeros.forEach(el => {
+        const final = parseInt(el.dataset.final, 10);
+        const sufijo = el.dataset.sufijo || "";
+        if (!final) return;
+        const duracion = 1200;
+        const inicio = performance.now();
+        function paso(ahora) {
+          const avance = Math.min((ahora - inicio) / duracion, 1);
+          el.textContent = Math.floor(avance * final) + sufijo;
+          if (avance < 1) requestAnimationFrame(paso);
+        }
+        requestAnimationFrame(paso);
+      });
+      observador.disconnect();
+    });
+  }, { threshold: 0.4 });
+  observador.observe(franja);
+}
+
+// --- Revelado suave al hacer scroll ---
+function iniciarRevelado() {
+  const elementos = document.querySelectorAll(".revelar");
+  if (elementos.length === 0) return;
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach(entrada => {
+      if (entrada.isIntersecting) {
+        entrada.target.classList.add("visible");
+        observador.unobserve(entrada.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  elementos.forEach(el => observador.observe(el));
+}
+
+// --- Enlace activo en la barra de navegación según la sección visible ---
+function iniciarScrollSpy() {
+  const enlaces = [...document.querySelectorAll(".nav-enlaces a")];
+  if (enlaces.length === 0) return;
+  const secciones = enlaces
+    .map(a => document.querySelector(a.getAttribute("href")))
+    .filter(Boolean);
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach(entrada => {
+      const enlace = enlaces.find(a => a.getAttribute("href") === `#${entrada.target.id}`);
+      if (!enlace) return;
+      if (entrada.isIntersecting) {
+        enlaces.forEach(a => a.classList.remove("activo"));
+        enlace.classList.add("activo");
+      }
+    });
+  }, { threshold: 0.5 });
+  secciones.forEach(s => observador.observe(s));
+}
+
+// --- Carrusel de testimonios: fundido automático + controles manuales ---
+function iniciarCarruselTestimonios(testimonios) {
+  const carrusel = document.getElementById("testimoniosCarrusel");
+  const controles = document.getElementById("testimoniosControles");
+  const puntosContenedor = document.getElementById("testimoniosPuntos");
+  if (!carrusel) return;
+
+  if (!testimonios || testimonios.length === 0) {
+    carrusel.innerHTML = '<p style="opacity:0.7;">Todavía no hay testimonios cargados. Agrégalos en data/camps.json.</p>';
+    return;
+  }
+
+  testimonios.forEach((t, i) => {
+    const slide = document.createElement("div");
+    slide.className = "testimonio-slide" + (i === 0 ? " activo" : "");
+    slide.innerHTML = `<div class="testimonio"><p>"${t.texto}"</p><span>${t.nombre}</span></div>`;
+    carrusel.appendChild(slide);
+  });
+
+  if (testimonios.length === 1) return; // sin controles si hay uno solo
+
+  controles.style.display = "flex";
+  const slides = [...carrusel.querySelectorAll(".testimonio-slide")];
+  testimonios.forEach((_, i) => {
+    const punto = document.createElement("button");
+    punto.className = "punto" + (i === 0 ? " activo" : "");
+    punto.setAttribute("aria-label", `Ir al testimonio ${i + 1}`);
+    punto.addEventListener("click", () => irATestimonio(i));
+    puntosContenedor.appendChild(punto);
+  });
+  const puntos = [...puntosContenedor.children];
+
+  let actual = 0;
+  let temporizador;
+
+  function irATestimonio(indice) {
+    slides[actual].classList.remove("activo");
+    puntos[actual].classList.remove("activo");
+    actual = (indice + slides.length) % slides.length;
+    slides[actual].classList.add("activo");
+    puntos[actual].classList.add("activo");
+    reiniciarAutoplay();
+  }
+
+  function reiniciarAutoplay() {
+    clearInterval(temporizador);
+    temporizador = setInterval(() => irATestimonio(actual + 1), 6000);
+  }
+
+  document.getElementById("testimonioAnterior").addEventListener("click", () => irATestimonio(actual - 1));
+  document.getElementById("testimonioSiguiente").addEventListener("click", () => irATestimonio(actual + 1));
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    reiniciarAutoplay();
+  }
+}
+
 (async function iniciar() {
   const [site, campamentos] = await Promise.all([
     cargarJSON("data/site.json"),
@@ -69,13 +213,14 @@ function crearTarjetaTestimonio(testimonio) {
     .forEach(c => sendero.appendChild(crearTarjetaCampamento(c)));
 
   // --- Testimonios (tomados de todos los campamentos) ---
-  const filaTestimonios = document.getElementById("filaTestimonios");
   const todosLosTestimonios = campamentos.flatMap(c => c.testimonios || []);
-  if (todosLosTestimonios.length === 0) {
-    filaTestimonios.innerHTML = '<p style="opacity:0.7;">Todavía no hay testimonios cargados. Agrégalos en data/camps.json.</p>';
-  } else {
-    todosLosTestimonios.forEach(t => filaTestimonios.appendChild(crearTarjetaTestimonio(t)));
-  }
+  iniciarCarruselTestimonios(todosLosTestimonios);
+
+  // --- Estadísticas, fogata, scroll-reveal y navegación activa ---
+  iniciarStats(site.estadisticas);
+  crearBrasas();
+  iniciarRevelado();
+  iniciarScrollSpy();
 
   // --- Contacto ---
   document.getElementById("tituloContacto").textContent = `Inscríbete al ${actual ? actual.nombre : "campamento de este año"}`;

@@ -43,15 +43,17 @@
       <img id="heroLogo" src="images/logo/logo-generico.svg" alt="Logo del campamento actual">
     </div>
   </div>
+  <div class="contenedor franja-stats" id="franjaStats"></div>
   <p class="hero-anio" id="heroAnio"></p>
+  <div id="contenedorBrasas" aria-hidden="true"></div>
 </section>
 
 <section class="seccion" id="mision">
-  <div class="contenedor">
+  <div class="contenedor revelar">
     <h2 class="titulo-seccion">Quiénes somos</h2>
     <p class="subtitulo-seccion">La Pastoral Juvenil de San Joaquín camina para que la fe de hoy sea el servicio de mañana.</p>
   </div>
-  <div class="contenedor mv-grid">
+  <div class="contenedor mv-grid revelar">
     <div class="mv-bloque">
       <h3>Misión</h3>
       <p id="textoMision"></p>
@@ -68,7 +70,7 @@
 </section>
 
 <section class="seccion seccion-papel-2" id="campamentos">
-  <div class="contenedor">
+  <div class="contenedor revelar">
     <h2 class="titulo-seccion">Nuestros campamentos</h2>
     <p class="subtitulo-seccion">Cada año queda su propia página, con su logo, su historia y las fotos de quienes lo vivieron. Entra a cada uno para conocerlo.</p>
     <div class="sendero" id="senderoCampamentos"></div>
@@ -76,15 +78,20 @@
 </section>
 
 <section class="seccion seccion-noche" id="testimonios">
-  <div class="contenedor">
+  <div class="contenedor revelar">
     <h2 class="titulo-seccion">Lo que dicen los jóvenes</h2>
     <p class="subtitulo-seccion">Testimonios de quienes ya vivieron un campamento con nosotros.</p>
-    <div class="testimonios-fila" id="filaTestimonios"></div>
+    <div class="testimonios-carrusel" id="testimoniosCarrusel"></div>
+    <div class="testimonios-controles" id="testimoniosControles" style="display:none;">
+      <button class="flecha-carrusel" id="testimonioAnterior" aria-label="Testimonio anterior">‹</button>
+      <div class="puntos-carrusel" id="testimoniosPuntos"></div>
+      <button class="flecha-carrusel" id="testimonioSiguiente" aria-label="Testimonio siguiente">›</button>
+    </div>
   </div>
 </section>
 
 <section class="seccion" id="contacto">
-  <div class="contenedor">
+  <div class="contenedor revelar">
     <h2 class="titulo-seccion" id="tituloContacto">Inscríbete al campamento de este año</h2>
     <p class="subtitulo-seccion" id="mensajeContacto"></p>
     <form class="formulario" id="formularioContacto">

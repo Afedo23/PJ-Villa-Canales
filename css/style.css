@@ -496,3 +496,182 @@ a { color: inherit; }
   color: var(--texto-claro);
   border-color: var(--azul-noche);
 }
+
+/* ============================================
+   Dinamismo: fogata en el hero, contador,
+   carruseles con controles, scroll-reveal
+   ============================================ */
+
+/* --- Fogata de partículas en el hero (un solo momento protagonista) --- */
+.hero { isolation: isolate; }
+
+.brasa {
+  position: absolute;
+  bottom: -10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--oro);
+  box-shadow: 0 0 8px 2px rgba(212,167,44,0.7);
+  opacity: 0;
+  animation: subir-brasa linear infinite;
+  z-index: 0;
+}
+
+@keyframes subir-brasa {
+  0%   { transform: translate(0, 0) scale(1);   opacity: 0; }
+  10%  { opacity: 0.9; }
+  90%  { opacity: 0.5; }
+  100% { transform: translate(var(--deriva, 20px), -340px) scale(0.3); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brasa { display: none; }
+}
+
+.hero-grid, .hero-anio { position: relative; z-index: 1; }
+
+/* --- Franja de estadísticas --- */
+.franja-stats {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 34px;
+  margin-top: 46px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(246,241,228,0.18);
+}
+
+.stat-item { min-width: 110px; }
+
+.stat-numero {
+  font-family: var(--serif);
+  font-size: 2.1rem;
+  color: var(--oro);
+  line-height: 1;
+}
+
+.stat-etiqueta {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-top: 4px;
+}
+
+/* --- Scroll reveal (un efecto discreto, no repetido por sección) --- */
+.revelar {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.revelar.visible { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .revelar { opacity: 1; transform: none; transition: none; }
+}
+
+/* --- Tarjetas de campamento: interacción al pasar el cursor --- */
+.tarjeta-campamento {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.tarjeta-campamento:hover,
+.tarjeta-campamento:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(16,41,59,0.16);
+  border-color: var(--ascua);
+}
+.tarjeta-campamento .miniatura img {
+  transition: transform 0.35s ease;
+}
+.tarjeta-campamento:hover .miniatura img { transform: scale(1.06) rotate(-2deg); }
+
+.boton { transition: transform 0.15s ease, background 0.2s ease; }
+.boton:active { transform: scale(0.97); }
+
+/* --- Barra de navegación: enlace activo según la sección visible --- */
+.nav-enlaces a { position: relative; padding-bottom: 3px; transition: opacity 0.2s ease; }
+.nav-enlaces a.activo { opacity: 1; }
+.nav-enlaces a.activo::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -3px;
+  height: 2px;
+  background: var(--oro);
+}
+
+/* --- Testimonios: carrusel con fundido + controles --- */
+.testimonios-carrusel {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 200px;
+}
+
+.testimonio-slide {
+  grid-column: 1;
+  grid-row: 1;
+  width: 100%;
+  max-width: 640px;
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+.testimonio-slide.activo {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.testimonios-controles {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 24px;
+  align-items: center;
+}
+
+.flecha-carrusel {
+  background: transparent;
+  border: 1px solid rgba(246,241,228,0.4);
+  color: var(--texto-claro);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: grid;
+  place-items: center;
+}
+.flecha-carrusel:hover { border-color: var(--oro); color: var(--oro); }
+
+.puntos-carrusel { display: flex; gap: 8px; }
+.punto {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(246,241,228,0.35);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.punto.activo { background: var(--oro); }
+
+/* --- Carrusel de fotos: controles y arrastre --- */
+.carrusel { position: relative; }
+.carrusel-controles {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.flecha-fotos {
+  background: var(--papel);
+  border: 1px solid var(--borde);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.flecha-fotos:hover { border-color: var(--ascua); color: var(--ascua); }
+.carrusel-pista { cursor: grab; }
+.carrusel-pista:active { cursor: grabbing; }

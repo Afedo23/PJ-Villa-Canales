@@ -3,6 +3,11 @@
   "grupo": "Pastoral Juvenil",
   "sloganGeneral": "Jóvenes que caminan, jóvenes que sirven",
   "anioActual": 2026,
+  "estadisticas": [
+    { "numero": "5+", "etiqueta": "años de campamento" },
+    { "numero": "150+", "etiqueta": "jóvenes participantes" },
+    { "numero": "20+", "etiqueta": "servidores activos" }
+  ],
   "mision": "Formar jóvenes discípulos misioneros que vivan y compartan el Evangelio dentro de la Parroquia San Joaquín, acompañándolos en su fe a través de la oración, la comunidad y el servicio, para que sean semilla de un futuro donde la Iglesia siga creciendo de mano de nuevas generaciones.",
   "vision": "Ser una Pastoral Juvenil viva y en crecimiento, reconocida en Villa Canales por formar jóvenes comprometidos, alegres y perseverantes en su fe, capaces de asumir con el tiempo el servicio y liderazgo de la parroquia, asegurando que la misión no se detenga con nosotros sino que continúe de generación en generación.",
   "objetivos": [
