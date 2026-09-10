@@ -5,7 +5,7 @@
     "slogan": "Reemplazar con el slogan de este año",
     "anio": 2026,
     "esActual": true,
-    "logo": "images/logo/logo-generico.svg",
+    "logo": "images/logo/logo.png",
     "descripcion": "Reemplaza este texto con la descripción del campamento de este año: el lugar, la fecha, el costo y a quién está dirigido. Este es el campamento que se está promocionando ahora mismo en la página principal.",
     "fotos": [],
     "testimonios": []
@@ -16,7 +16,7 @@
     "slogan": "Reemplazar con el slogan de ese año",
     "anio": 2025,
     "esActual": false,
-    "logo": "images/logo/logo-generico.svg",
+    "logo": "images/logo/logo.png",
     "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
     "fotos": [],
     "testimonios": [
