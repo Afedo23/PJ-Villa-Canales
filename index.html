@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pastoral Juvenil — Parroquia San Joaquín, Villa Canales</title>
+<meta name="description" content="Pastoral Juvenil de la Parroquia San Joaquín, Villa Canales: misión, visión, objetivos y campamentos juveniles.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="encabezado">
+  <div class="contenedor barra-nav">
+    <a href="#inicio" class="marca">
+      <img src="images/logo/logo-generico.svg" alt="Logo Pastoral Juvenil">
+      <span>Pastoral Juvenil</span>
+    </a>
+    <button class="boton-menu" id="botonMenu" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    <ul class="nav-enlaces" id="navEnlaces">
+      <li><a href="#mision">Misión y visión</a></li>
+      <li><a href="#campamentos">Campamentos</a></li>
+      <li><a href="#testimonios">Testimonios</a></li>
+      <li><a href="#contacto">Inscríbete</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="contenedor hero-grid">
+    <div>
+      <p class="hero-etiqueta">Parroquia San Joaquín · Villa Canales</p>
+      <h1 id="heroNombre">Campamento</h1>
+      <p class="hero-slogan" id="heroSlogan">Slogan del campamento</p>
+      <p class="hero-descripcion" id="heroDescripcion">Descripción del campamento de este año.</p>
+      <div class="hero-acciones">
+        <a href="#contacto" class="boton boton-ascua">Inscríbete este año</a>
+        <a href="#campamentos" class="boton boton-fantasma">Ver campamentos anteriores</a>
+      </div>
+    </div>
+    <div class="hero-logo-envoltura">
+      <img id="heroLogo" src="images/logo/logo-generico.svg" alt="Logo del campamento actual">
+    </div>
+  </div>
+  <p class="hero-anio" id="heroAnio"></p>
+</section>
+
+<section class="seccion" id="mision">
+  <div class="contenedor">
+    <h2 class="titulo-seccion">Quiénes somos</h2>
+    <p class="subtitulo-seccion">La Pastoral Juvenil de San Joaquín camina para que la fe de hoy sea el servicio de mañana.</p>
+  </div>
+  <div class="contenedor mv-grid">
+    <div class="mv-bloque">
+      <h3>Misión</h3>
+      <p id="textoMision"></p>
+    </div>
+    <div class="mv-bloque">
+      <h3>Visión</h3>
+      <p id="textoVision"></p>
+    </div>
+  </div>
+  <div class="contenedor objetivos-franja">
+    <h3>Objetivos</h3>
+    <ul class="lista-objetivos" id="listaObjetivos"></ul>
+  </div>
+</section>
+
+<section class="seccion seccion-papel-2" id="campamentos">
+  <div class="contenedor">
+    <h2 class="titulo-seccion">Nuestros campamentos</h2>
+    <p class="subtitulo-seccion">Cada año queda su propia página, con su logo, su historia y las fotos de quienes lo vivieron. Entra a cada uno para conocerlo.</p>
+    <div class="sendero" id="senderoCampamentos"></div>
+  </div>
+</section>
+
+<section class="seccion seccion-noche" id="testimonios">
+  <div class="contenedor">
+    <h2 class="titulo-seccion">Lo que dicen los jóvenes</h2>
+    <p class="subtitulo-seccion">Testimonios de quienes ya vivieron un campamento con nosotros.</p>
+    <div class="testimonios-fila" id="filaTestimonios"></div>
+  </div>
+</section>
+
+<section class="seccion" id="contacto">
+  <div class="contenedor">
+    <h2 class="titulo-seccion" id="tituloContacto">Inscríbete al campamento de este año</h2>
+    <p class="subtitulo-seccion" id="mensajeContacto"></p>
+    <form class="formulario" id="formularioContacto">
+      <div>
+        <label for="nombre">Nombre completo</label>
+        <input type="text" id="nombre" name="nombre" required>
+      </div>
+      <div>
+        <label for="edad">Edad</label>
+        <input type="number" id="edad" name="edad" min="10" max="99">
+      </div>
+      <div>
+        <label for="telefono">Teléfono / WhatsApp</label>
+        <input type="tel" id="telefono" name="telefono" required>
+      </div>
+      <div>
+        <label for="mensaje">Mensaje (opcional)</label>
+        <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos si vienes solo, con tu grupo, si es tu primer campamento..."></textarea>
+      </div>
+      <button type="submit" class="boton boton-ascua">Enviar inscripción</button>
+      <p id="estadoFormulario" style="font-size:0.9rem;"></p>
+    </form>
+  </div>
+</section>
+
+<footer class="pie">
+  <div class="contenedor pie-fila">
+    <span>Pastoral Juvenil — Parroquia San Joaquín, Villa Canales</span>
+    <span id="pieRedes"></span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

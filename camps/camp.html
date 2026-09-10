@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campamento — Pastoral Juvenil San Joaquín</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="encabezado">
+  <div class="contenedor barra-nav">
+    <a href="../index.html" class="marca">
+      <img src="../images/logo/logo-generico.svg" alt="Logo Pastoral Juvenil">
+      <span>Pastoral Juvenil</span>
+    </a>
+    <ul class="nav-enlaces" style="display:flex;">
+      <li><a href="../index.html#campamentos">Todos los campamentos</a></li>
+      <li><a href="../index.html#contacto">Inscríbete</a></li>
+    </ul>
+  </div>
+</header>
+
+<div class="contenedor migaja">
+  <a href="../index.html">Inicio</a> / <a href="../index.html#campamentos">Campamentos</a> / <span id="migajaNombre"></span>
+</div>
+
+<section class="cabecera-campamento">
+  <div class="contenedor">
+    <div style="display:flex; gap:24px; align-items:center; flex-wrap:wrap;">
+      <img id="logoCampamento" src="../images/logo/logo-generico.svg" alt="" style="width:110px; height:110px; border-radius:50%; border:1px solid var(--borde);">
+      <div>
+        <h1 id="nombreCampamento">Campamento</h1>
+        <p class="anio-slogan" id="sloganCampamento"></p>
+      </div>
+    </div>
+    <div class="selector-anios" id="selectorAnios"></div>
+  </div>
+</section>
+
+<section class="seccion">
+  <div class="contenedor">
+    <h2 class="titulo-seccion">Sobre este campamento</h2>
+    <p id="descripcionCampamento" style="max-width:70ch;"></p>
+  </div>
+</section>
+
+<section class="seccion seccion-papel-2">
+  <div class="contenedor">
+    <h2 class="titulo-seccion">Fotos del campamento</h2>
+    <p class="subtitulo-seccion">Momentos vividos durante las actividades.</p>
+    <div class="carrusel">
+      <div class="carrusel-pista" id="pistaFotos"></div>
+    </div>
+  </div>
+</section>
+
+<section class="seccion seccion-noche">
+  <div class="contenedor">
+    <h2 class="titulo-seccion">Testimonios de este campamento</h2>
+    <div class="testimonios-fila" id="filaTestimoniosCampamento"></div>
+  </div>
+</section>
+
+<section class="seccion">
+  <div class="contenedor" style="text-align:center;">
+    <h2 class="titulo-seccion">¿Listo para vivir el campamento de este año?</h2>
+    <a href="../index.html#contacto" class="boton boton-ascua">Inscríbete ahora</a>
+  </div>
+</section>
+
+<footer class="pie">
+  <div class="contenedor pie-fila">
+    <span>Pastoral Juvenil — Parroquia San Joaquín, Villa Canales</span>
+    <a href="../index.html">Volver al inicio</a>
+  </div>
+</footer>
+
+<script src="../js/camp.js"></script>
+</body>
+</html>

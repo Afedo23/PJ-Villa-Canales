@@ -1,0 +1,23 @@
+{
+  "parroquia": "Parroquia San Joaquín, Villa Canales",
+  "grupo": "Pastoral Juvenil",
+  "sloganGeneral": "Jóvenes que caminan, jóvenes que sirven",
+  "anioActual": 2026,
+  "mision": "Formar jóvenes discípulos misioneros que vivan y compartan el Evangelio dentro de la Parroquia San Joaquín, acompañándolos en su fe a través de la oración, la comunidad y el servicio, para que sean semilla de un futuro donde la Iglesia siga creciendo de mano de nuevas generaciones.",
+  "vision": "Ser una Pastoral Juvenil viva y en crecimiento, reconocida en Villa Canales por formar jóvenes comprometidos, alegres y perseverantes en su fe, capaces de asumir con el tiempo el servicio y liderazgo de la parroquia, asegurando que la misión no se detenga con nosotros sino que continúe de generación en generación.",
+  "objetivos": [
+    "Acompañar a los jóvenes en su crecimiento espiritual y humano dentro de la comunidad parroquial.",
+    "Formar nuevos líderes que puedan sostener y multiplicar el servicio de la Pastoral Juvenil en los próximos años.",
+    "Fortalecer la unidad y el sentido de pertenencia entre los jóvenes a través de la convivencia y el campamento anual.",
+    "Motivar la participación activa en los distintos servicios de la parroquia: liturgia, catequesis, música y misión.",
+    "Dejar un testimonio de fe que inspire a más jóvenes de Villa Canales a acercarse a la Iglesia."
+  ],
+  "contacto": {
+    "mensaje": "¿Quieres inscribirte al campamento de este año o saber más de la Pastoral Juvenil?",
+    "whatsapp": "REEMPLAZAR_CON_NUMERO",
+    "facebook": "REEMPLAZAR_CON_LINK_FACEBOOK",
+    "instagram": "REEMPLAZAR_CON_LINK_INSTAGRAM",
+    "correo": "REEMPLAZAR_CON_CORREO"
+  },
+  "formspreeEndpoint": "https://formspree.io/f/mwlkyove"
+}
