@@ -13,8 +13,10 @@ function crearTarjetaCampamento(campamento) {
   a.className = "tarjeta-campamento";
   a.href = `camps/camp.html?id=${encodeURIComponent(campamento.id)}`;
   a.innerHTML = `
-    <div class="miniatura">
-      <img src="${campamento.logo}" alt="Logo ${campamento.nombre}" width="90" height="90">
+        <div class="miniatura">
+      <span class="marco-logo marco-logo--tarjeta">
+        <img src="${campamento.logo}" alt="Logo ${campamento.nombre}">
+      </span>
     </div>
     <div class="contenido">
       ${campamento.esActual ? '<span class="etiqueta-actual">Campamento de este año</span>' : ""}

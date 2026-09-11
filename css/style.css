@@ -74,7 +74,31 @@ a { color: inherit; }
   color: var(--texto-claro);
 }
 
-.marca img { height: 34px; width: 34px; }
+.marca img { display: block; }
+
+/* --- Marco unificado para el logo real: se usa en el encabezado,
+   las tarjetas de campamento y el detalle de cada campamento, para
+   que se vea igual en todos lados sin importar dónde esté puesto --- */
+.marco-logo {
+  background: var(--papel);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 3px rgba(212,167,44,0.28), 0 8px 18px rgba(16,41,59,0.22);
+  overflow: hidden;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+.marco-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+}
+.marco-logo--nav { width: 42px; height: 42px; padding: 3px; box-shadow: 0 0 0 2px rgba(212,167,44,0.35); }
+.marco-logo--tarjeta { width: 128px; height: 128px; padding: 12px; }
+.marco-logo--detalle { width: 130px; height: 130px; padding: 13px; }
 
 .nav-enlaces {
   display: flex;
@@ -329,13 +353,14 @@ a { color: inherit; }
 }
 
 .tarjeta-campamento .miniatura {
-  background: var(--azul-noche);
+  background: var(--papel-2);
   display: grid;
   place-items: center;
   padding: 18px;
 }
 
-.tarjeta-campamento .miniatura img { border-radius: 50%; }
+.tarjeta-campamento .miniatura .marco-logo { transition: transform 0.35s ease; }
+.tarjeta-campamento:hover .miniatura .marco-logo { transform: scale(1.06) rotate(-2deg); }
 
 .tarjeta-campamento .contenido {
   padding: 26px 28px;
@@ -583,7 +608,6 @@ a { color: inherit; }
 .tarjeta-campamento .miniatura img {
   transition: transform 0.35s ease;
 }
-.tarjeta-campamento:hover .miniatura img { transform: scale(1.06) rotate(-2deg); }
 
 .boton { transition: transform 0.15s ease, background 0.2s ease; }
 .boton:active { transform: scale(0.97); }
