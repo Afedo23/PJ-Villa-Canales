@@ -815,8 +815,8 @@ html.cursor-personalizado textarea {
 .icono-contacto:hover { opacity: 1; transform: translateY(-2px); }
 
 .icono-contacto img {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
   display: block;
   flex-shrink: 0; 
