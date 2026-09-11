@@ -793,3 +793,24 @@ html.cursor-personalizado textarea {
 
 /* --- Elementos con desplazamiento parallax --- */
 [data-parallax] { will-change: transform; }
+
+/* --- Íconos de contacto (propios, no logos oficiales) --- */
+.fila-iconos-contacto {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+}
+
+.icono-contacto {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  font-size: 0.88rem;
+  opacity: 0.9;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.icono-contacto:hover { opacity: 1; transform: translateY(-2px); }
+.icono-contacto img { width: 30px; height: 30px; }
