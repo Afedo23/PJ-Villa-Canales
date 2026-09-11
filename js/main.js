@@ -230,16 +230,16 @@ function iniciarCarruselTestimonios(testimonios) {
 
   const redes = [];
   if (site.contacto.whatsapp && !site.contacto.whatsapp.startsWith("REEMPLAZAR")) {
-    redes.push(`<a class="icono-contacto" href="https://wa.me/${site.contacto.whatsapp}" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><img src="images/iconos/whatsapp.svg" alt=""><span>WhatsApp</span></a>`);
+    redes.push(`<a class="icono-contacto" href="https://wa.me/${site.contacto.whatsapp}" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><img src="images/iconos/whatsapp.png" alt=""><span>WhatsApp</span></a>`);
   }
   if (site.contacto.facebook && !site.contacto.facebook.startsWith("REEMPLAZAR")) {
-    redes.push(`<a class="icono-contacto" href="${site.contacto.facebook}" target="_blank" rel="noopener" aria-label="Síguenos en Facebook"><img src="images/iconos/facebook.svg" alt=""><span>Facebook</span></a>`);
+    redes.push(`<a class="icono-contacto" href="${site.contacto.facebook}" target="_blank" rel="noopener" aria-label="Síguenos en Facebook"><img src="images/iconos/facebook.png" alt=""><span>Facebook</span></a>`);
   }
   if (site.contacto.instagram && !site.contacto.instagram.startsWith("REEMPLAZAR")) {
-    redes.push(`<a class="icono-contacto" href="${site.contacto.instagram}" target="_blank" rel="noopener" aria-label="Síguenos en Instagram"><img src="images/iconos/instagram.svg" alt=""><span>Instagram</span></a>`);
+    redes.push(`<a class="icono-contacto" href="${site.contacto.instagram}" target="_blank" rel="noopener" aria-label="Síguenos en Instagram"><img src="images/iconos/instagram.png" alt=""><span>Instagram</span></a>`);
   }
   if (site.contacto.correo && !site.contacto.correo.startsWith("REEMPLAZAR")) {
-    redes.push(`<a class="icono-contacto" href="mailto:${site.contacto.correo}" aria-label="Escríbenos por correo"><img src="images/iconos/correo.svg" alt=""><span>Correo</span></a>`);
+    redes.push(`<a class="icono-contacto" href="mailto:${site.contacto.correo}" aria-label="Escríbenos por correo"><img src="images/iconos/correo.png" alt=""><span>Correo</span></a>`);
   }
   document.getElementById("pieRedes").innerHTML = `<div class="fila-iconos-contacto">${redes.join("")}</div>`;
 
