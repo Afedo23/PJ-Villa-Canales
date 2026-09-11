@@ -229,26 +229,26 @@ function iniciarCarruselTestimonios(testimonios) {
   document.getElementById("mensajeContacto").textContent = site.contacto.mensaje;
 
   const redes = [];
-  if (site.contacto.whatsapp && !site.contacto.whatsapp.startsWith("REEMPLAZAR")) {
-    redes.push(`<a href="https://wa.me/${site.contacto.whatsapp}" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">📱 WhatsApp</a>`);
+  if (site.contacto.whatsapp && !site.contacto.whatsapp.startsWith("59862697")) {
+    redes.push(`<a class="icono-contacto" href="https://wa.me/${site.contacto.whatsapp}" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><img src="images/iconos/whatsapp.svg" alt=""><span>WhatsApp</span></a>`);
   }
-  if (site.contacto.facebook && !site.contacto.facebook.startsWith("REEMPLAZAR")) {
-    redes.push(`<a href="${site.contacto.facebook}" target="_blank" rel="noopener" aria-label="Síguenos en Facebook">📘 Facebook</a>`);
+  if (site.contacto.facebook && !site.contacto.facebook.startsWith("https://www.facebook.com/pastoral.villacanales")) {
+    redes.push(`<a class="icono-contacto" href="${site.contacto.facebook}" target="_blank" rel="noopener" aria-label="Síguenos en Facebook"><img src="images/iconos/facebook.svg" alt=""><span>Facebook</span></a>`);
   }
-  if (site.contacto.instagram && !site.contacto.instagram.startsWith("REEMPLAZAR")) {
-    redes.push(`<a href="${site.contacto.instagram}" target="_blank" rel="noopener" aria-label="Síguenos en Instagram">📸 Instagram</a>`);
+  if (site.contacto.instagram && !site.contacto.instagram.startsWith("https://www.instagram.com/pastoral_juvenil_vc_/")) {
+    redes.push(`<a class="icono-contacto" href="${site.contacto.instagram}" target="_blank" rel="noopener" aria-label="Síguenos en Instagram"><img src="images/iconos/instagram.svg" alt=""><span>Instagram</span></a>`);
   }
-  if (site.contacto.correo && !site.contacto.correo.startsWith("REEMPLAZAR")) {
-    redes.push(`<a href="mailto:${site.contacto.correo}" aria-label="Escríbenos por correo">✉️ Correo</a>`);
+  if (site.contacto.correo && !site.contacto.correo.startsWith("pastoraljuvenilvc@gmail.com")) {
+    redes.push(`<a class="icono-contacto" href="mailto:${site.contacto.correo}" aria-label="Escríbenos por correo"><img src="images/iconos/correo.svg" alt=""><span>Correo</span></a>`);
   }
-  document.getElementById("pieRedes").innerHTML = redes.join(" · ");
+  document.getElementById("pieRedes").innerHTML = `<div class="fila-iconos-contacto">${redes.join("")}</div>`;
 
   // --- Formulario: envía a Formspree si ya se configuró el endpoint ---
   const form = document.getElementById("formularioContacto");
   const estado = document.getElementById("estadoFormulario");
   form.addEventListener("submit", async (evento) => {
     evento.preventDefault();
-    if (!site.formspreeEndpoint || site.formspreeEndpoint.startsWith("REEMPLAZAR")) {
+    if (!site.formspreeEndpoint || site.formspreeEndpoint.startsWith("PJVC2026")) {
       estado.textContent = "El formulario todavía no está conectado. Configura formspreeEndpoint en data/site.json (ver README).";
       return;
     }
