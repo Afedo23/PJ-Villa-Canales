@@ -798,14 +798,14 @@ html.cursor-personalizado textarea {
 .fila-iconos-contacto {
   display: flex;
   flex-wrap: wrap;
-  gap: 18px;
+  gap: 10px;
   align-items: center;
 }
 
 .icono-contacto {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   text-decoration: none;
   color: inherit;
   font-size: 0.88rem;
@@ -815,8 +815,8 @@ html.cursor-personalizado textarea {
 .icono-contacto:hover { opacity: 1; transform: translateY(-2px); }
 
 .icono-contacto img {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
   display: block;
   flex-shrink: 0; 
