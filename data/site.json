@@ -19,10 +19,10 @@
   ],
   "contacto": {
     "mensaje": "¿Quieres inscribirte al campamento de este año o saber más de la Pastoral Juvenil?",
-    "whatsapp": "REEMPLAZAR_CON_NUMERO",
-    "facebook": "REEMPLAZAR_CON_LINK_FACEBOOK",
-    "instagram": "REEMPLAZAR_CON_LINK_INSTAGRAM",
-    "correo": "REEMPLAZAR_CON_CORREO"
+    "whatsapp": "5567-0111",
+    "facebook": "https://www.facebook.com/pastoral.villacanales",
+    "instagram": "https://www.instagram.com/pastoral_juvenil_vc_/",
+    "correo": "pastoraljuvenilvc@gmail.com"
   },
   "formspreeEndpoint": "https://formspree.io/f/mwlkyove"
 }

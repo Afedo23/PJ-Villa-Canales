@@ -230,13 +230,16 @@ function iniciarCarruselTestimonios(testimonios) {
 
   const redes = [];
   if (site.contacto.whatsapp && !site.contacto.whatsapp.startsWith("REEMPLAZAR")) {
-    redes.push(`<a href="https://wa.me/${site.contacto.whatsapp}">WhatsApp</a>`);
+    redes.push(`<a href="https://wa.me/${site.contacto.whatsapp}" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">📱 WhatsApp</a>`);
   }
   if (site.contacto.facebook && !site.contacto.facebook.startsWith("REEMPLAZAR")) {
-    redes.push(`<a href="${site.contacto.facebook}">Facebook</a>`);
+    redes.push(`<a href="${site.contacto.facebook}" target="_blank" rel="noopener" aria-label="Síguenos en Facebook">📘 Facebook</a>`);
   }
   if (site.contacto.instagram && !site.contacto.instagram.startsWith("REEMPLAZAR")) {
-    redes.push(`<a href="${site.contacto.instagram}">Instagram</a>`);
+    redes.push(`<a href="${site.contacto.instagram}" target="_blank" rel="noopener" aria-label="Síguenos en Instagram">📸 Instagram</a>`);
+  }
+  if (site.contacto.correo && !site.contacto.correo.startsWith("REEMPLAZAR")) {
+    redes.push(`<a href="mailto:${site.contacto.correo}" aria-label="Escríbenos por correo">✉️ Correo</a>`);
   }
   document.getElementById("pieRedes").innerHTML = redes.join(" · ");
 
