@@ -1,7 +1,7 @@
 [
   {
     "id": "2026",
-    "nombre": "Campamento Raíces",
+    "nombre": "Campamento ¿?",
     "slogan": "Reemplazar con el slogan de este año",
     "anio": 2026,
     "esActual": true,
@@ -11,12 +11,156 @@
     "testimonios": []
   },
   {
-    "id": "2025",
-    "nombre": "Campamento (nombre 2025)",
-    "slogan": "Reemplazar con el slogan de ese año",
-    "anio": 2025,
+    "id": "2023",
+    "nombre": "Campamento JERUT",
+    "slogan": "Despojados en el Tiempo",
+    "anio": 2023,
     "esActual": false,
-    "logo": "images/logo/logo.png",
+    "logo": "images/(logo,campamentos)/2023.png",
+    "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
+    "fotos": [],
+    "testimonios": [
+      {
+        "nombre": "Nombre del joven",
+        "texto": "Reemplaza con el testimonio real de un joven que vivió este campamento."
+      }
+    ]
+  },
+  {
+    "id": "2022",
+    "nombre": "Campamento Gravedad CERO",
+    "slogan": "A travez de un Espacio de Libertad",
+    "anio": 2022,
+    "esActual": false,
+    "logo": "images/(logo,campamentos)/2022.png",
+    "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
+    "fotos": [],
+    "testimonios": [
+      {
+        "nombre": "Nombre del joven",
+        "texto": "Reemplaza con el testimonio real de un joven que vivió este campamento."
+      }
+    ]
+  },
+  {
+    "id": "2021",
+    "nombre": "Campamento Encandilados",
+    "slogan": "Unidos por la Luz de Cristo",
+    "anio": 2021,
+    "esActual": false,
+    "logo": "images/(logo,campamentos)/2021.png",
+    "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
+    "fotos": [],
+    "testimonios": [
+      {
+        "nombre": "Nombre del joven",
+        "texto": "Reemplaza con el testimonio real de un joven que vivió este campamento."
+      }
+    ]
+  },
+  {
+    "id": "2020",
+    "nombre": "Campamento Radicati",
+    "slogan": "Que no te arranquen de la Tierra",
+    "anio": 2020,
+    "esActual": false,
+    "logo": "images/(logo,campamentos)/2020.png",
+    "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
+    "fotos": [],
+    "testimonios": [
+      {
+        "nombre": "Nombre del joven",
+        "texto": "Reemplaza con el testimonio real de un joven que vivió este campamento."
+      }
+    ]
+  },
+  {
+    "id": "2019",
+    "nombre": "Campamento RESET",
+    "slogan": "Despojados en el Tiempo",
+    "anio": 2019,
+    "esActual": false,
+    "logo": "images/(logo,campamentos)/2019.png",
+    "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
+    "fotos": [],
+    "testimonios": [
+      {
+        "nombre": "Nombre del joven",
+        "texto": "Reemplaza con el testimonio real de un joven que vivió este campamento."
+      }
+    ]
+  },
+  {
+    "id": "2018",
+    "nombre": "Campamento Centinelas",
+    "slogan": "Con mi Biblia y mi Fe de vigilante estaré",
+    "anio": 2018,
+    "esActual": false,
+    "logo": "images/(logo,campamentos)/2018.png",
+    "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
+    "fotos": [],
+    "testimonios": [
+      {
+        "nombre": "Nombre del joven",
+        "texto": "Reemplaza con el testimonio real de un joven que vivió este campamento."
+      }
+    ]
+  },
+  {
+    "id": "2017",
+    "nombre": "Campamento Generación 14,12",
+    "slogan": "Despojados en el Tiempo",
+    "anio": 2017,
+    "esActual": false,
+    "logo": "images/(logo,campamentos)/2017.png",
+    "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
+    "fotos": [],
+    "testimonios": [
+      {
+        "nombre": "Nombre del joven",
+        "texto": "Reemplaza con el testimonio real de un joven que vivió este campamento."
+      }
+    ]
+  },
+  {
+    "id": "2016",
+    "nombre": "Campamento Hagamos Lío",
+    "slogan": "Somos protagonistas del Cambio",
+    "anio": 2016,
+    "esActual": false,
+    "logo": "images/(logo,campamentos)/2016.png",
+    "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
+    "fotos": [],
+    "testimonios": [
+      {
+        "nombre": "Nombre del joven",
+        "texto": "Reemplaza con el testimonio real de un joven que vivió este campamento."
+      }
+    ]
+  },
+  {
+    "id": "2015",
+    "nombre": "Campamento METANOIA",
+    "slogan": "Al siguiente Nivel...",
+    "anio": 2015,
+    "esActual": false,
+    "logo": "images/(logo,campamentos)/2015.png",
+    "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
+    "fotos": [],
+    "testimonios": [
+      {
+        "nombre": "Nombre del joven",
+        "texto": "Reemplaza con el testimonio real de un joven que vivió este campamento."
+      }
+    ]
+  },
+  {
+    "id": "2014",
+    "nombre": "Campamento Alerta modo ON",
+    "slogan": "En hora de Iniciar",
+    "anio": 2014,
+    "esActual": false,
+    "logo": "images/(logo,campamentos)/2014.png",
     "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
     "fotos": [],
     "testimonios": [
