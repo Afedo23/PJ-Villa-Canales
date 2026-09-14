@@ -7,7 +7,11 @@
     "esActual": true,
     "logo": "images/logo/logo.png",
     "descripcion": "Reemplaza este texto con la descripción del campamento de este año: el lugar, la fecha, el costo y a quién está dirigido. Este es el campamento que se está promocionando ahora mismo en la página principal.",
-    "fotos": [],
+    "fotos": [
+      "images/historias/2026/261.jpg",
+      "images/historias/2026/262.jpg",
+      "images/historias/2026/263.jpg"
+    ],
     "testimonios": []
   },
   {
@@ -16,9 +20,22 @@
     "slogan": "Despojados en el Tiempo",
     "anio": 2023,
     "esActual": false,
-    "logo": "images/(logo,campamentos)/2023.png",
+    "logo": "images/campamentos/2023.png",
     "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
-    "fotos": [],
+    "fotos": [
+      "images/historias/2023/231.jpg",
+      "images/historias/2023/232.jpg",
+      "images/historias/2023/233.jpg",
+      "images/historias/2023/234.jpg",
+      "images/historias/2023/235.jpg",
+      "images/historias/2023/236.jpg",
+      "images/historias/2023/237.jpg",
+      "images/historias/2023/238.jpg",
+      "images/historias/2023/239.jpg",
+      "images/historias/2023/2310.jpg",
+      "images/historias/2023/2311.jpg",
+      "images/historias/2023/2312.jpg"
+    ],
     "testimonios": [
       {
         "nombre": "Nombre del joven",
@@ -32,9 +49,22 @@
     "slogan": "A travez de un Espacio de Libertad",
     "anio": 2022,
     "esActual": false,
-    "logo": "images/(logo,campamentos)/2022.png",
+    "logo": "images/campamentos/2022.png",
     "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
-    "fotos": [],
+    "fotos": [
+      "images/historias/2022/221.jpg",
+      "images/historias/2022/222.jpg",
+      "images/historias/2022/223.jpg",
+      "images/historias/2022/224.jpg",
+      "images/historias/2022/225.jpg",
+      "images/historias/2022/226.jpg",
+      "images/historias/2022/227.jpg",
+      "images/historias/2022/228.jpg",
+      "images/historias/2022/229.jpg",
+      "images/historias/2022/2210.jpg",
+      "images/historias/2022/2211.jpg",
+      "images/historias/2022/2212.jpg"
+    ],
     "testimonios": [
       {
         "nombre": "Nombre del joven",
@@ -48,9 +78,22 @@
     "slogan": "Unidos por la Luz de Cristo",
     "anio": 2021,
     "esActual": false,
-    "logo": "images/(logo,campamentos)/2021.png",
+    "logo": "images/campamentos/2021.png",
     "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
-    "fotos": [],
+    "fotos": [
+      "images/historias/2021/211.jpg",
+      "images/historias/2021/212.jpg",
+      "images/historias/2021/213.jpg",
+      "images/historias/2021/214.jpg",
+      "images/historias/2021/215.jpg",
+      "images/historias/2021/216.jpg",
+      "images/historias/2021/217.jpg",
+      "images/historias/2021/218.jpg",
+      "images/historias/2021/219.jpg",
+      "images/historias/2021/2110.jpg",
+      "images/historias/2021/2111.jpg",
+      "images/historias/2021/2112.jpg"
+    ],
     "testimonios": [
       {
         "nombre": "Nombre del joven",
@@ -64,9 +107,22 @@
     "slogan": "Que no te arranquen de la Tierra",
     "anio": 2020,
     "esActual": false,
-    "logo": "images/(logo,campamentos)/2020.png",
+    "logo": "images/campamentos/2020.png",
     "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
-    "fotos": [],
+    "fotos": [
+      "images/historias/2020/201.jpg",
+      "images/historias/2020/202.jpg",
+      "images/historias/2020/203.jpg",
+      "images/historias/2020/204.jpg",
+      "images/historias/2020/205.jpg",
+      "images/historias/2020/206.jpg",
+      "images/historias/2020/207.jpg",
+      "images/historias/2020/208.jpg",
+      "images/historias/2020/209.jpg",
+      "images/historias/2020/2010.jpg",
+      "images/historias/2020/2011.jpg",
+      "images/historias/2020/2012.jpg"
+    ],
     "testimonios": [
       {
         "nombre": "Nombre del joven",
@@ -80,9 +136,22 @@
     "slogan": "Despojados en el Tiempo",
     "anio": 2019,
     "esActual": false,
-    "logo": "images/(logo,campamentos)/2019.png",
+    "logo": "images/campamentos/2019.png",
     "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
-    "fotos": [],
+    "fotos": [
+      "images/historias/2019/191.jpg",
+      "images/historias/2019/192.jpg",
+      "images/historias/2019/193.jpg",
+      "images/historias/2019/194.jpg",
+      "images/historias/2019/195.jpg",
+      "images/historias/2019/196.jpg",
+      "images/historias/2019/197.jpg",
+      "images/historias/2019/198.jpg",
+      "images/historias/2019/199.jpg",
+      "images/historias/2019/1910.jpg",
+      "images/historias/2019/1911.jpg",
+      "images/historias/2019/1912.jpg"
+    ],
     "testimonios": [
       {
         "nombre": "Nombre del joven",
@@ -96,9 +165,22 @@
     "slogan": "Con mi Biblia y mi Fe de vigilante estaré",
     "anio": 2018,
     "esActual": false,
-    "logo": "images/(logo,campamentos)/2018.png",
+    "logo": "images/campamentos/2018.png",
     "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
-    "fotos": [],
+    "fotos": [
+      "images/historias/2018/181.jpg",
+      "images/historias/2018/182.jpg",
+      "images/historias/2018/183.jpg",
+      "images/historias/2018/184.jpg",
+      "images/historias/2018/185.jpg",
+      "images/historias/2018/186.jpg",
+      "images/historias/2018/187.jpg",
+      "images/historias/2018/188.jpg",
+      "images/historias/2018/189.jpg",
+      "images/historias/2018/1810.jpg",
+      "images/historias/2018/1811.jpg",
+      "images/historias/2018/1812.jpg"
+    ],
     "testimonios": [
       {
         "nombre": "Nombre del joven",
@@ -112,9 +194,22 @@
     "slogan": "Despojados en el Tiempo",
     "anio": 2017,
     "esActual": false,
-    "logo": "images/(logo,campamentos)/2017.png",
+    "logo": "images/campamentos/2017.png",
     "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
-    "fotos": [],
+    "fotos": [
+      "images/historias/2017/171.jpg",
+      "images/historias/2017/172.jpg",
+      "images/historias/2017/173.jpg",
+      "images/historias/2017/174.jpg",
+      "images/historias/2017/175.jpg",
+      "images/historias/2017/176.jpg",
+      "images/historias/2017/177.jpg",
+      "images/historias/2017/178.jpg",
+      "images/historias/2017/179.jpg",
+      "images/historias/2017/1710.jpg",
+      "images/historias/2017/1711.jpg",
+      "images/historias/2017/1712.jpg"
+    ],
     "testimonios": [
       {
         "nombre": "Nombre del joven",
@@ -128,9 +223,22 @@
     "slogan": "Somos protagonistas del Cambio",
     "anio": 2016,
     "esActual": false,
-    "logo": "images/(logo,campamentos)/2016.png",
+    "logo": "images/campamentos/2016.png",
     "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
-    "fotos": [],
+    "fotos": [
+      "images/historias/2016/161.jpg",
+      "images/historias/2016/162.jpg",
+      "images/historias/2016/163.jpg",
+      "images/historias/2016/164.jpg",
+      "images/historias/2016/165.jpg",
+      "images/historias/2016/166.jpg",
+      "images/historias/2016/167.jpg",
+      "images/historias/2016/168.jpg",
+      "images/historias/2016/169.jpg",
+      "images/historias/2016/1610.jpg",
+      "images/historias/2016/1611.jpg",
+      "images/historias/2016/1612.jpg"
+    ],
     "testimonios": [
       {
         "nombre": "Nombre del joven",
@@ -144,9 +252,22 @@
     "slogan": "Al siguiente Nivel...",
     "anio": 2015,
     "esActual": false,
-    "logo": "images/(logo,campamentos)/2015.png",
+    "logo": "images/campamentos/2015.png",
     "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
-    "fotos": [],
+    "fotos": [
+      "images/historias/2015/151.jpg",
+      "images/historias/2015/152.jpg",
+      "images/historias/2015/153.jpg",
+      "images/historias/2015/154.jpg",
+      "images/historias/2015/155.jpg",
+      "images/historias/2015/156.jpg",
+      "images/historias/2015/157.jpg",
+      "images/historias/2015/158.jpg",
+      "images/historias/2015/159.jpg",
+      "images/historias/2015/1510.jpg",
+      "images/historias/2015/1511.jpg",
+      "images/historias/2015/1512.jpg"
+    ],
     "testimonios": [
       {
         "nombre": "Nombre del joven",
@@ -160,9 +281,22 @@
     "slogan": "En hora de Iniciar",
     "anio": 2014,
     "esActual": false,
-    "logo": "images/(logo,campamentos)/2014.png",
+    "logo": "images/campamentos/2014.png",
     "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
-    "fotos": [],
+    "fotos": [
+      "images/historias/2014/141.jpg",
+      "images/historias/2014/142.jpg",
+      "images/historias/2014/143.jpg",
+      "images/historias/2014/144.jpg",
+      "images/historias/2014/145.jpg",
+      "images/historias/2014/146.jpg",
+      "images/historias/2014/147.jpg",
+      "images/historias/2014/148.jpg",
+      "images/historias/2014/149.jpg",
+      "images/historias/2014/1410.jpg",
+      "images/historias/2014/1411.jpg",
+      "images/historias/2014/1412.jpg"
+    ],
     "testimonios": [
       {
         "nombre": "Nombre del joven",
