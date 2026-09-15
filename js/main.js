@@ -199,12 +199,14 @@ function iniciarCarruselTestimonios(testimonios) {
   }
 
   // --- Misión, visión, objetivos ---
-  document.getElementById("textoMision").textContent = site.mision;
-  document.getElementById("textoVision").textContent = site.vision;
+  const conNegritas = (texto) => texto.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+
+  document.getElementById("textoMision").innerHTML = conNegritas(site.mision);
+  document.getElementById("textoVision").innerHTML = conNegritas(site.vision);
   const listaObjetivos = document.getElementById("listaObjetivos");
   site.objetivos.forEach(obj => {
     const li = document.createElement("li");
-    li.innerHTML = obj.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+    li.innerHTML = conNegritas(obj);
     listaObjetivos.appendChild(li);
   });
 
