@@ -293,6 +293,12 @@ a { color: inherit; }
   color: var(--ascua);
 }
 
+.mv-bloque p {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
 .objetivos-franja {
   border-top: 1px solid var(--borde);
   background: var(--papel);

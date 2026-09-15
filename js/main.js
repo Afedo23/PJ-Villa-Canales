@@ -204,7 +204,7 @@ function iniciarCarruselTestimonios(testimonios) {
   const listaObjetivos = document.getElementById("listaObjetivos");
   site.objetivos.forEach(obj => {
     const li = document.createElement("li");
-    li.textContent = obj;
+    li.innerHTML = obj.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
     listaObjetivos.appendChild(li);
   });
 
