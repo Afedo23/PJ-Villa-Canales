@@ -239,7 +239,10 @@ function iniciarCarruselTestimonios(testimonios) {
     redes.push(`<a class="icono-contacto" href="${site.contacto.instagram}" target="_blank" rel="noopener" aria-label="Síguenos en Instagram"><img src="images/iconos/instagram.png" alt=""><span>Instagram</span></a>`);
   }
   if (site.contacto.correo && !site.contacto.correo.startsWith("REEMPLAZAR")) {
-    redes.push(`<a class="icono-contacto" href="mailto:${site.contacto.correo}" aria-label="Escríbenos por correo"><img src="images/iconos/correo.png" alt=""><span>Correo</span></a>`);
+    redes.push(`<a class="icono-contacto" href="mailto:${site.contacto.correo}" aria-label="Escríbenos por correo"><img src="images/iconos/gmail.png" alt=""><span>Gmail</span></a>`);
+  }
+  if (site.contacto.tiktok && !site.contacto.tiktok.startsWith("REEMPLAZAR")) {
+    redes.push(`<a class="icono-contacto" href="${site.contacto.tiktok}" target="_blank" rel="noopener" aria-label="Síguenos en TikTok"><img src="images/iconos/tiktok.png" alt=""><span>TikTok</span></a>`);
   }
   document.getElementById("pieRedes").innerHTML = `<div class="fila-iconos-contacto">${redes.join("")}</div>`;
 

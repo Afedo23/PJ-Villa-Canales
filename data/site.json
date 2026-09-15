@@ -4,25 +4,31 @@
   "sloganGeneral": "Jóvenes que caminan, jóvenes que sirven",
   "anioActual": 2026,
   "estadisticas": [
-    { "numero": "5+", "etiqueta": "años de campamento" },
-    { "numero": "150+", "etiqueta": "jóvenes participantes" },
+    { "numero": "10+", "etiqueta": "años de campamento" },
+    { "numero": "900+", "etiqueta": "jóvenes participantes" },
     { "numero": "20+", "etiqueta": "servidores activos" }
   ],
-  "mision": "Formar jóvenes discípulos misioneros que vivan y compartan el Evangelio dentro de la Parroquia San Joaquín, acompañándolos en su fe a través de la oración, la comunidad y el servicio, para que sean semilla de un futuro donde la Iglesia siga creciendo de mano de nuevas generaciones.",
-  "vision": "Ser una Pastoral Juvenil viva y en crecimiento, reconocida en Villa Canales por formar jóvenes comprometidos, alegres y perseverantes en su fe, capaces de asumir con el tiempo el servicio y liderazgo de la parroquia, asegurando que la misión no se detenga con nosotros sino que continúe de generación en generación.",
+  "mision": "Somos un espacio de encuentro con Cristo, formación integral y acción transformadora. A través de actividades, programas y proyectos, inspiramos y acompañamos a los jóvenes en su camino de fe, para que sean discípulos misioneros comprometidos con el servicio. Aquí encuentras tu lugar, tu propósito y tu comunidad.",
+  "vision": "Ser testigos del amor de Cristo en el mundo, guiando a los jóvenes a una fe auténtica y transformadora. Soñamos con construir un mundo más justo, fraterno y lleno de esperanza. ¡Jóvenes con Fe, Transformando el Mundo!",
   "objetivos": [
-    "Acompañar a los jóvenes en su crecimiento espiritual y humano dentro de la comunidad parroquial.",
-    "Formar nuevos líderes que puedan sostener y multiplicar el servicio de la Pastoral Juvenil en los próximos años.",
-    "Fortalecer la unidad y el sentido de pertenencia entre los jóvenes a través de la convivencia y el campamento anual.",
-    "Motivar la participación activa en los distintos servicios de la parroquia: liturgia, catequesis, música y misión.",
-    "Dejar un testimonio de fe que inspire a más jóvenes de Villa Canales a acercarse a la Iglesia."
+    "Encuentro real con Cristo. Que cada joven experimente el amor de Dios y descubra su presencia viva en su vida.",
+    "Crecimiento espiritual. Retiros, oración, reflexión y acompañamiento para profundizar en la fe y encontrar en Dios tu identidad y propósito.",
+    "Acompañamiento vocacional. Te ayudamos a descubrir y seguir con valentía la vocación que Dios tiene para ti.",
+    "Comunidad que acoge. Un espacio fraterno, diverso y seguro, donde te sientes amado, valorado y respetado.",
+    "Acompañamiento personal. Caminamos contigo, como hermanos y amigos, ofreciendo apoyo, escucha y guía.",
+    "Compromiso con el servicio. Somos agentes de cambio, llevando la luz del Evangelio a los más necesitados y construyendo un mundo más justo y solidario.",
+    "Formación integral. Crecemos en fe, doctrina y talentos, para afrontar la vida con esperanza y confianza en Dios.",
+    "Participación activa. Una generación comprometida con la Iglesia, la comunidad parroquial y la vida sacramental.",
+    "Liderazgo que inspira. Formamos líderes capaces de guiar a otros en la fe y el servicio, siendo ejemplo de autenticidad y esperanza.",
+    "Evangelización creativa. Usamos redes, música, arte y cultura para llevar el mensaje de Jesús a otros jóvenes."
   ],
   "contacto": {
     "mensaje": "¿Quieres inscribirte al campamento de este año o saber más de la Pastoral Juvenil?",
     "whatsapp": "59862697",
     "facebook": "https://www.facebook.com/pastoral.villacanales",
     "instagram": "https://www.instagram.com/pastoral_juvenil_vc_/",
-    "correo": "pjuvenil.sanjoaquin@gmail.com"
+    "correo": "pjuvenil.sanjoaquin@gmail.com",
+    "tiktok": "https://www.tiktok.com/@pj.san.joaquin.vc"
   },
   "formspreeEndpoint": "https://formspree.io/f/mwlkyove"
 }
