@@ -423,12 +423,21 @@ a { color: inherit; }
   scrollbar-width: thin;
 }
 
-.carrusel-pista img,
+.carrusel-pista img {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  height: clamp(220px, 42vh, 380px);
+  width: auto;
+  max-width: 88vw;
+  object-fit: contain;
+  border: 1px solid var(--borde);
+  background: var(--azul-noche);
+}
+
 .carrusel-vacio {
   scroll-snap-align: start;
   flex: 0 0 min(420px, 82vw);
-  aspect-ratio: 4/3;
-  object-fit: cover;
+  height: clamp(220px, 42vh, 380px);
   border: 1px solid var(--borde);
   background: var(--papel-2);
 }
@@ -827,4 +836,15 @@ html.cursor-personalizado textarea {
   display: block;
   flex-shrink: 0; 
   align-self: center;       /* ← y esto también falta */
+}
+
+/* --- Texto justificado en bloques largos --- */
+.subtitulo-seccion,
+.mv-bloque p,
+.lista-objetivos li,
+.tarjeta-campamento .contenido p,
+#descripcionCampamento {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
 }
