@@ -312,26 +312,6 @@ if (actual) {
   }
 }
 
-  // Información de fechas y reserva
-  if (preciosInfo) {
-    const fechas = (actual.fechasPago || [])
-      .map(f => `<li><strong>${f.fecha}:</strong> ${f.detalle}</li>`)
-      .join("");
-    preciosInfo.innerHTML = `
-      <div class="precio-info-bloque">
-        <h4>Fechas de pago</h4>
-        <ul>${fechas || "<li>Por confirmar</li>"}</ul>
-      </div>
-      <div class="precio-info-bloque">
-        <h4>Para reservar tu lugar</h4>
-        <p>Aparta con <strong>${actual.montoReserva || "Q150"}</strong> y asegura tu cupo.</p>
-      </div>
-      <div class="precio-info-bloque">
-        <h4>Lugar del campamento</h4>
-        <p>${actual.lugar || "Por confirmar"}</p>
-      </div>
-    `;
-  }
 }
 
   // --- Estadísticas, fogata, scroll-reveal y navegación activa ---
