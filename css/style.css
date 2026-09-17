@@ -915,7 +915,7 @@ html.cursor-personalizado textarea {
 }
 
 .precio-card.destacado {
-  border: 2px solid #d9a82e;
+  border: 2px solid #c76b1f;
   box-shadow: 0 12px 30px rgba(199, 107, 31, 0.15);
 }
 
@@ -924,7 +924,7 @@ html.cursor-personalizado textarea {
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: #2e4a8f;
+  background: #c76b1f;
   color: #fff;
   padding: 4px 14px;
   border-radius: 20px;
@@ -1063,7 +1063,7 @@ html.cursor-personalizado textarea {
 }
 
 .boton-paquete.activo {
-  border-color: #d9a82e;
+  border-color: #c76b1f;
   background: rgba(199, 107, 31, 0.1);
   box-shadow: 0 0 0 2px rgba(199, 107, 31, 0.2);
 }
@@ -1074,7 +1074,7 @@ html.cursor-personalizado textarea {
 
 .boton-paquete .precio-paquete {
   font-size: 0.85rem;
-  color: #2e4a8f;
+  color: #c76b1f;
   font-weight: 600;
 }
 
