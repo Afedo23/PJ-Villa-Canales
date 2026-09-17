@@ -82,7 +82,7 @@ a { color: inherit; }
 .marco-logo {
   width: 100px;
   height: 100px;
-  border-radius: 50%;
+  border-radius: 20%;
   overflow: hidden;
   display: inline-flex;
   align-items: center;
@@ -95,8 +95,7 @@ a { color: inherit; }
 .marco-logo img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  padding: 0;   /* muestra el logo completo sin recortarlo */
+  object-fit: contain;  /* muestra el logo completo sin recortarlo */
   box-sizing: border-box;
   display: block;
 }
@@ -1114,19 +1113,4 @@ html.cursor-personalizado textarea {
   font-weight: 500;
   color: #2a2018;
   font-size: 0.9rem;
-}
-
-.hero-logo-envoltura {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.hero-logo-envoltura img {
-  width: 100%;
-  max-width: 420px;       /* controla qué tan grande se ve */
-  height: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.25));
-  will-change: transform; /* para que el parallax vaya suave */
 }
