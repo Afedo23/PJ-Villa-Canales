@@ -241,7 +241,7 @@ a { color: inherit; }
 .hero-logo-envoltura {
   aspect-ratio: 1;
   width: min(320px, 70vw);
-  border-radius: 50%;
+  border-radius: 20%;
   background: var(--papel);
   display: grid;
   place-items: center;
