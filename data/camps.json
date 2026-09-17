@@ -1,16 +1,23 @@
 [
   {
     "id": "2026",
-    "nombre": "Campamento ¿?",
+    "nombre": "Campamento Configúrate",
     "slogan": "Reemplazar con el slogan de este año",
     "anio": 2026,
     "esActual": true,
-    "logo": "images/logo/logo.png",
+    "logo": "images/logo/2026.png",
     "descripcion": "Reemplaza este texto con la descripción del campamento de este año: el lugar, la fecha, el costo y a quién está dirigido. Este es el campamento que se está promocionando ahora mismo en la página principal.",
     "fotos": [
-      "images/historias/2026/261.jpg",
-      "images/historias/2026/262.jpg",
-      "images/historias/2026/263.jpg"
+      "images/historias/2026/261.jpeg",
+      "images/historias/2026/262.jpeg",
+      "images/historias/2026/263.jpeg",
+      "images/historias/2026/264.jpeg",
+      "images/historias/2026/265.jpeg",
+      "images/historias/2026/266.jpeg",
+      "images/historias/2026/267.jpeg",
+      "images/historias/2026/268.jpeg",
+      "images/historias/2026/269.jpeg",
+      "images/historias/2026/2610.jpeg"
     ],
     "testimonios": []
   },
@@ -21,17 +28,17 @@
     "anio": 2023,
     "esActual": false,
     "logo": "images/campamentos/2023.png",
-    "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
+    "descripcion": " Nuestra primera experiencia acampando en medio del bosque, bajo el slogan de “Despojados en el tiempo” nos olvidamos de las redes sociales y nos introducimos en las 12 tribus de Israel, ¿Recuerdas tu tribu? El frio no fue impedimento para vivir nuestra Hora Santa y Nuestra Misa con el Coro de la Pastoral Juvenil, quienes se prepararon para dar su voz al Señor. De los momentos sublimes la interpretación de la Pasión de Nuestro Señor.",
     "fotos": [
       "images/historias/2023/231.jpg",
       "images/historias/2023/232.jpg",
-      "images/historias/2023/233.JPG",
-      "images/historias/2023/234.JPG",
-      "images/historias/2023/235.JPG",
-      "images/historias/2023/236.HEIC",
-      "images/historias/2023/237.HEIC",
-      "images/historias/2023/238.HEIC",
-      "images/historias/2023/239.JPG",
+      "images/historias/2023/233.jpg",
+      "images/historias/2023/234.jpg",
+      "images/historias/2023/235.jpg",
+      "images/historias/2023/236.jpg",
+      "images/historias/2023/237.jpg",
+      "images/historias/2023/238.jpg",
+      "images/historias/2023/239.jpg",
       "images/historias/2023/2310.jpg",
       "images/historias/2023/2311.jpg",
       "images/historias/2023/2312.jpg"
@@ -50,7 +57,7 @@
     "anio": 2022,
     "esActual": false,
     "logo": "images/campamentos/2022.png",
-    "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
+    "descripcion": "Desde caminatas bajo la luz de las estrellas, el inicio del dia con caminata de antorchas hasta las faldas del volcán, nuestro momento inolvidable con Nuestro Señor resplandeciendo en medio de la oscuridad; el rally a lo extremo… nos hacía recordar que Somos Jóvenes y somos libres pero que la libertad no es libertinaje.",
     "fotos": [
       "images/historias/2022/221.jpg",
       "images/historias/2022/222.jpg",
@@ -79,7 +86,7 @@
     "anio": 2021,
     "esActual": false,
     "logo": "images/campamentos/2021.png",
-    "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
+    "descripcion": "Unidos por la luz de Cristo, tras una crisis salubre por el Covid, el cuál nos dejo secuelas de ansiedad, miedo… Recordamos la luz de Cristo y que estábamos más unidos que nunca… Un campamento Híbrido que con el cierre pudimos tener un momento ameno y lleno de esperanza.",
     "fotos": [
       "images/historias/2021/211.jpg",
       "images/historias/2021/212.jpg",
@@ -108,7 +115,7 @@
     "anio": 2020,
     "esActual": false,
     "logo": "images/campamentos/2020.png",
-    "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
+    "descripcion": "¡Ni la Pandemia pudo con nosotros! Un año atípico ya que por las condiciones salubres no podíamos salir de nuestros hogares, pero eso no impidió poder vivir nuestra experiencia de Campamento; y recuerda… ¡Qué no te arranquen de la tierra.",
     "fotos": [
       "images/historias/2020/201.jpg",
       "images/historias/2020/202.jpg",
@@ -137,7 +144,7 @@
     "anio": 2019,
     "esActual": false,
     "logo": "images/campamentos/2019.png",
-    "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
+    "descripcion": "Ya era el 5to. Era momento de reiniciar el ciclo, quién diría que en ese campamento saldrían nuevos servidores, ese año tuvimos la incorporación de nuestro Hermanos Salesianos que con su estilo Juvenil nos hicieron divertirnos en actividades que explotaron al máximo nuestra juventud y la fogata con cantos.",
     "fotos": [
       "images/historias/2019/191.jpg",
       "images/historias/2019/192.jpg",
@@ -166,7 +173,7 @@
     "anio": 2018,
     "esActual": false,
     "logo": "images/campamentos/2018.png",
-    "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
+    "descripcion": "¿Qué ves en la noche dime Centinela? Lo recordarán algunos, la famosa frase que nos invitaba a estar alertas  a la venida de nuestro Señor. Y nuestra alarma con el ¡Dale Centinela, Levante que es de mañana! Inolvidables momentos, con la fogata escuchando los audios de las personas que nos aman.",
     "fotos": [
       "images/historias/2018/181.jpg",
       "images/historias/2018/182.jpg",
@@ -195,7 +202,7 @@
     "anio": 2017,
     "esActual": false,
     "logo": "images/campamentos/2017.png",
-    "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
+    "descripcion": "El ultimo en Pino Dulce,  grato recuerdo el rezo del Santo Rosario en un recorrido por el parque, el Señor nos acompaño en un Capilla realizada para poder pasar a adorarle durante la noche como cabañas podía pasar a estar en un momento íntimo con él, el Rally con juegos que conectaron nuestra juventud.",
     "fotos": [
       "images/historias/2017/171.jpg",
       "images/historias/2017/172.jpg",
@@ -224,7 +231,7 @@
     "anio": 2016,
     "esActual": false,
     "logo": "images/campamentos/2016.png",
-    "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
+    "descripcion": "La inesperada sorpresa, todos esperábamos un cálido clima y resulta qué terminamos bajo un inmenso frío donde lo único que faltó fue bañarse a uno que otro joven; perdimos el sol durante el sábado y parte del domingo pero la Luz de Nuestro Señor y la calidez nos ayudaron a demostrar nuestra juventud e ímpetu con nuestras alabanzas durante la noche y la implementación de la “Cristoteca” por primera vez.",
     "fotos": [
       "images/historias/2016/161.jpg",
       "images/historias/2016/162.jpg",
@@ -253,7 +260,7 @@
     "anio": 2015,
     "esActual": false,
     "logo": "images/campamentos/2015.png",
-    "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
+    "descripcion": "El que marcó a toda una generación de servidores y campistas el nombre hacía referencia al cambio profundo de mentalidad, de visión del mundo o de transformación interior, con un Rally bajo la lluvia, juegos de agua, oración profunda y una ardiente fe que sobresaltaba a cada Joven, fue el campamento en el que sirvieron personas que ya gozan de la presencia de Nuestro Señor….",
     "fotos": [
       "images/historias/2015/151.jpg",
       "images/historias/2015/152.jpg",
@@ -282,7 +289,7 @@
     "anio": 2014,
     "esActual": false,
     "logo": "images/campamentos/on.png",
-    "descripcion": "Reemplaza este texto con la descripción de lo que se vivió en el campamento 2025: el tema, el lugar y lo más importante que se trabajó con los jóvenes.",
+    "descripcion": " Lo que inició como una idea se hace una realidad en Muxbal, nuestro primer campamento juvenil, lleno de una experiencia que vendría y para quedarse un buen tiempo en compañía de los Scouts de Guatemala; el nombre hace referencia a encender lo que arde en nuestros corazones y da una apertura para la conformación de la Pastoral Juvenil San Joaquín.",
     "fotos": [
       "images/historias/2014/141.jpg",
       "images/historias/2014/142.jpg",
