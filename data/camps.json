@@ -7,27 +7,27 @@
     "esActual": true,
     "logo": "images/campamentos/2026.png",
     "descripcion": "...",
-    "lugar": "Finca El Paraíso, Villa Canales",
+    "lugar": "Entre Nubes y Montañas, San José Pinula",
     "fechasPago": [
-      { "fecha": "15 de marzo", "detalle": "Primer pago" },
-      { "fecha": "15 de abril", "detalle": "Segundo pago" },
-      { "fecha": "15 de mayo", "detalle": "Pago final" }
+      { "fecha": "26 de Septimebre", "detalle": "Primer pago" },
+      { "fecha": "11 de Octubre", "detalle": "Segundo pago" },
+      { "fecha": "1 de Noviembre", "detalle": "Pago final" }
     ],
     "montoReserva": "Q150",
     "paquetes": [
       {
-        "nombre": "Paquete Básico",
-        "precio": "Q350",
+        "nombre": "Paquete Reiníciate",
+        "precio": "Q400",
         "incluye": ["Alimentación", "Hospedaje", "Materiales"]
       },
       {
-        "nombre": "Paquete Completo",
-        "precio": "Q500",
+        "nombre": "Paquete Reconectáte",
+        "precio": "Q450",
         "incluye": ["Alimentación", "Hospedaje", "Materiales", "Transporte", "Camiseta"]
       },
       {
-        "nombre": "Paquete Premium",
-        "precio": "Q700",
+        "nombre": "Paquete Actualízate",
+        "precio": "Q500",
         "incluye": ["Todo lo anterior", "Habitación privada", "Kit de bienvenida"]
       }
     ],
