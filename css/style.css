@@ -852,37 +852,52 @@ html.cursor-personalizado textarea {
 
 /* --- Sección de precios --- */
 .seccion-precios {
-  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
-  color: #fff;
+  /* Sin fondo propio: hereda el fondo papel del sitio */
   padding: 80px 0;
 }
 
 .precios-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  /* 3 columnas en escritorio, 2 en tablet, 1 en móvil */
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   margin-top: 2.5rem;
+  align-items: stretch;
+}
+
+@media (max-width: 980px) {
+  .precios-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  .precios-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .precio-card {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 16px;
   padding: 2rem 1.5rem;
   text-align: center;
   position: relative;
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .precio-card:hover {
   transform: translateY(-6px);
-  border-color: #e8a33d;
+  border-color: #c76b1f;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
 .precio-card.destacado {
-  border-color: #e8a33d;
-  background: rgba(232, 163, 61, 0.1);
-  box-shadow: 0 0 30px rgba(232, 163, 61, 0.2);
+  border: 2px solid #c76b1f;
+  box-shadow: 0 12px 30px rgba(199, 107, 31, 0.15);
 }
 
 .precio-etiqueta {
@@ -890,60 +905,80 @@ html.cursor-personalizado textarea {
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: #e8a33d;
-  color: #1a1a2e;
+  background: #c76b1f;
+  color: #fff;
   padding: 4px 14px;
   border-radius: 20px;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .precio-card h3 {
   font-family: 'Fraunces', serif;
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.35rem;
+  margin-bottom: 0.4rem;
+  color: #2a2018;
 }
 
 .precio-monto {
   font-size: 2rem;
   font-weight: 600;
-  color: #e8a33d;
-  margin: 0.5rem 0 1.2rem;
+  color: #c76b1f;
+  margin: 0.4rem 0 1.4rem;
 }
 
 .precio-card ul {
   list-style: none;
   padding: 0;
-  margin-bottom: 1.5rem;
+  margin: 0 0 1.5rem;
   text-align: left;
+  flex-grow: 1;
 }
 
 .precio-card ul li {
-  padding: 0.4rem 0;
+  padding: 0.45rem 0;
   font-size: 0.9rem;
-  opacity: 0.85;
+  color: #4a3f36;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.07);
+}
+
+.precio-card ul li:last-child {
+  border-bottom: none;
 }
 
 .precio-card ul li::before {
   content: "✓ ";
-  color: #e8a33d;
+  color: #c76b1f;
   font-weight: bold;
+  margin-right: 4px;
 }
 
+.precio-card .boton {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+}
+
+/* Info inferior: fechas de pago y reserva */
 .precios-info {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-top: 3rem;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.04);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.precio-info-bloque {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 16px;
+  padding: 1.5rem;
 }
 
 .precio-info-bloque h4 {
   font-family: 'Fraunces', serif;
-  color: #e8a33d;
+  color: #c76b1f;
   margin-bottom: 0.8rem;
   font-size: 1.1rem;
 }
@@ -951,9 +986,16 @@ html.cursor-personalizado textarea {
 .precio-info-bloque ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .precio-info-bloque ul li {
-  padding: 0.3rem 0;
+  padding: 0.35rem 0;
   font-size: 0.95rem;
+  color: #4a3f36;
+}
+
+.precio-info-bloque p {
+  color: #4a3f36;
+  line-height: 1.5;
 }

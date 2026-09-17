@@ -223,14 +223,15 @@ function iniciarCarruselTestimonios(testimonios) {
   const todosLosTestimonios = campamentos.flatMap(c => c.testimonios || []);
   iniciarCarruselTestimonios(todosLosTestimonios);
 
-  if (actual) {
+// --- Sección de precios del campamento actual ---
+if (actual) {
   const preciosGrid = document.getElementById("preciosGrid");
   const preciosInfo = document.getElementById("preciosInfo");
   const preciosSubtitulo = document.getElementById("preciosSubtitulo");
   const selectorPaquete = document.getElementById("paquete");
 
   if (preciosSubtitulo) {
-    preciosSubtitulo.textContent = `Lugar: ${actual.lugar || "Por confirmar"}`;
+    preciosSubtitulo.textContent = "Elige el paquete que mejor se adapte a ti. Todos incluyen acceso completo al campamento.";
   }
 
   // Tarjetas de paquetes
@@ -270,6 +271,10 @@ function iniciarCarruselTestimonios(testimonios) {
       <div class="precio-info-bloque">
         <h4>Para reservar tu lugar</h4>
         <p>Aparta con <strong>${actual.montoReserva || "Q150"}</strong> y asegura tu cupo.</p>
+      </div>
+      <div class="precio-info-bloque">
+        <h4>Lugar del campamento</h4>
+        <p>${actual.lugar || "Por confirmar"}</p>
       </div>
     `;
   }
