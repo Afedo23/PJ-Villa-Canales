@@ -229,15 +229,43 @@ if (actual) {
   const preciosInfo = document.getElementById("preciosInfo");
   const preciosSubtitulo = document.getElementById("preciosSubtitulo");
   const selectorPaquetes = document.getElementById("selectorPaquetes");
-const paqueteOculto = document.getElementById("paquete");
+  const paqueteOculto = document.getElementById("paquete");
 
   if (preciosSubtitulo) {
     preciosSubtitulo.textContent = "Elige el paquete que mejor se adapte a ti. Todos incluyen acceso completo al campamento.";
   }
 
-  // Tarjetas de paquetes
-  if (preciosGrid && actual.paquetes && actual.paquetes.length > 0) {
-    actual.paquetes.forEach((paq, i) => {
+  const paquetes = actual.paquetes || [];
+
+  // 1) Primero, crear los botones del formulario (sin listener de tarjeta)
+  if (selectorPaquetes && paquetes.length > 0) {
+    paquetes.forEach(paq => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "boton-paquete";
+      btn.dataset.valor = paq.nombre;
+      btn.setAttribute("role", "radio");
+      btn.setAttribute("aria-checked", "false");
+      btn.innerHTML = `
+        <span class="nombre-paquete">${paq.nombre}</span>
+        <span class="precio-paquete">${paq.precio}</span>
+      `;
+      btn.addEventListener("click", () => {
+        selectorPaquetes.querySelectorAll(".boton-paquete").forEach(b => {
+          b.classList.remove("activo");
+          b.setAttribute("aria-checked", "false");
+        });
+        btn.classList.add("activo");
+        btn.setAttribute("aria-checked", "true");
+        paqueteOculto.value = paq.nombre;
+      });
+      selectorPaquetes.appendChild(btn);
+    });
+  }
+
+  // 2) Luego, crear las tarjetas de precio con su botón "Inscribirme"
+  if (preciosGrid && paquetes.length > 0) {
+    paquetes.forEach((paq, i) => {
       const card = document.createElement("div");
       card.className = "precio-card" + (i === 1 ? " destacado" : "");
       card.innerHTML = `
@@ -245,36 +273,44 @@ const paqueteOculto = document.getElementById("paquete");
         <h3>${paq.nombre}</h3>
         <p class="precio-monto">${paq.precio}</p>
         <ul>${paq.incluye.map(item => `<li>${item}</li>`).join("")}</ul>
-        <a href="#contacto" class="boton boton-ascua">Inscribirme</a>
+        <a href="#contacto" class="boton boton-ascua" data-paquete="${paq.nombre}">Inscribirme</a>
       `;
       preciosGrid.appendChild(card);
 
-      // Llenar el select del formulario
-      // Crear botón de paquete en el formulario
-if (selectorPaquetes) {
-  const btn = document.createElement("button");
-  btn.type = "button";
-  btn.className = "boton-paquete";
-  btn.dataset.valor = paq.nombre;
-  btn.setAttribute("role", "radio");
-  btn.setAttribute("aria-checked", "false");
-  btn.innerHTML = `
-    <span class="nombre-paquete">${paq.nombre}</span>
-    <span class="precio-paquete">${paq.precio}</span>
-  `;
-  btn.addEventListener("click", () => {
-    selectorPaquetes.querySelectorAll(".boton-paquete").forEach(b => {
-      b.classList.remove("activo");
-      b.setAttribute("aria-checked", "false");
-    });
-    btn.classList.add("activo");
-    btn.setAttribute("aria-checked", "true");
-    paqueteOculto.value = paq.nombre;
-  });
-  selectorPaquetes.appendChild(btn);
-}
+      // Al hacer clic, se preselecciona ese paquete
+      card.querySelector("[data-paquete]").addEventListener("click", () => {
+        if (!selectorPaquetes || !paqueteOculto) return;
+        selectorPaquetes.querySelectorAll(".boton-paquete").forEach(b => {
+          const coincide = b.dataset.valor === paq.nombre;
+          b.classList.toggle("activo", coincide);
+          b.setAttribute("aria-checked", coincide ? "true" : "false");
+        });
+        paqueteOculto.value = paq.nombre;
+      });
     });
   }
+
+  // 3) Info de fechas, reserva y lugar
+  if (preciosInfo) {
+    const fechas = (actual.fechasPago || [])
+      .map(f => `<li><strong>${f.fecha}:</strong> ${f.detalle}</li>`)
+      .join("");
+    preciosInfo.innerHTML = `
+      <div class="precio-info-bloque">
+        <h4>Fechas de pago</h4>
+        <ul>${fechas || "<li>Por confirmar</li>"}</ul>
+      </div>
+      <div class="precio-info-bloque">
+        <h4>Para reservar tu lugar</h4>
+        <p>Aparta con <strong>${actual.montoReserva || "Q150"}</strong> y asegura tu cupo.</p>
+      </div>
+      <div class="precio-info-bloque">
+        <h4>Lugar del campamento</h4>
+        <p>${actual.lugar || "Por confirmar"}</p>
+      </div>
+    `;
+  }
+}
 
   // Información de fechas y reserva
   if (preciosInfo) {
