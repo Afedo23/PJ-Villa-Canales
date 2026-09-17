@@ -122,11 +122,11 @@
         <label for="mensaje">Mensaje (opcional)</label>
         <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos si vienes solo, con tu grupo, si es tu primer campamento..."></textarea>
       </div>
-      <div>
-        <label for="paquete">Paquete de interés</label>
-        <select id="paquete" name="paquete">
-          <option value="">Selecciona un paquete</option>
-        </select>
+      <div class="campo-paquetes">
+        <label>Paquete de interés</label>
+        <div class="selector-paquetes" id="selectorPaquetes" role="radiogroup" aria-label="Selecciona tu paquete"></div>
+        <!-- Campo oculto que se envía con el formulario -->
+        <input type="hidden" id="paquete" name="paquete" required>
       </div>
       <button type="submit" class="boton boton-ascua">Enviar inscripción</button>
       <p id="estadoFormulario" style="font-size:0.9rem;"></p>

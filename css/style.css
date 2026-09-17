@@ -999,3 +999,55 @@ html.cursor-personalizado textarea {
   color: #4a3f36;
   line-height: 1.5;
 }
+
+
+/* --- Selector de paquetes como botones --- */
+.campo-paquetes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.selector-paquetes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.boton-paquete {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  padding: 0.7rem 1.1rem;
+  background: #fff;
+  border: 1.5px solid rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: #2a2018;
+  text-align: left;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.boton-paquete:hover {
+  border-color: #c76b1f;
+  transform: translateY(-2px);
+}
+
+.boton-paquete.activo {
+  border-color: #c76b1f;
+  background: rgba(199, 107, 31, 0.1);
+  box-shadow: 0 0 0 2px rgba(199, 107, 31, 0.2);
+}
+
+.boton-paquete .nombre-paquete {
+  font-weight: 600;
+}
+
+.boton-paquete .precio-paquete {
+  font-size: 0.85rem;
+  color: #c76b1f;
+  font-weight: 600;
+}

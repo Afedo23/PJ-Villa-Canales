@@ -228,7 +228,8 @@ if (actual) {
   const preciosGrid = document.getElementById("preciosGrid");
   const preciosInfo = document.getElementById("preciosInfo");
   const preciosSubtitulo = document.getElementById("preciosSubtitulo");
-  const selectorPaquete = document.getElementById("paquete");
+  const selectorPaquetes = document.getElementById("selectorPaquetes");
+const paqueteOculto = document.getElementById("paquete");
 
   if (preciosSubtitulo) {
     preciosSubtitulo.textContent = "Elige el paquete que mejor se adapte a ti. Todos incluyen acceso completo al campamento.";
@@ -249,12 +250,29 @@ if (actual) {
       preciosGrid.appendChild(card);
 
       // Llenar el select del formulario
-      if (selectorPaquete) {
-        const opt = document.createElement("option");
-        opt.value = paq.nombre;
-        opt.textContent = `${paq.nombre} — ${paq.precio}`;
-        selectorPaquete.appendChild(opt);
-      }
+      // Crear botón de paquete en el formulario
+if (selectorPaquetes) {
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "boton-paquete";
+  btn.dataset.valor = paq.nombre;
+  btn.setAttribute("role", "radio");
+  btn.setAttribute("aria-checked", "false");
+  btn.innerHTML = `
+    <span class="nombre-paquete">${paq.nombre}</span>
+    <span class="precio-paquete">${paq.precio}</span>
+  `;
+  btn.addEventListener("click", () => {
+    selectorPaquetes.querySelectorAll(".boton-paquete").forEach(b => {
+      b.classList.remove("activo");
+      b.setAttribute("aria-checked", "false");
+    });
+    btn.classList.add("activo");
+    btn.setAttribute("aria-checked", "true");
+    paqueteOculto.value = paq.nombre;
+  });
+  selectorPaquetes.appendChild(btn);
+}
     });
   }
 
@@ -312,28 +330,43 @@ if (actual) {
   const form = document.getElementById("formularioContacto");
   const estado = document.getElementById("estadoFormulario");
   form.addEventListener("submit", async (evento) => {
-    evento.preventDefault();
-    if (!site.formspreeEndpoint || site.formspreeEndpoint.startsWith("REEMPLAZAR")) {
-      estado.textContent = "El formulario todavía no está conectado. Configura formspreeEndpoint en data/site.json (ver README).";
-      return;
-    }
-    estado.textContent = "Enviando...";
-    try {
-      const respuesta = await fetch(site.formspreeEndpoint, {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: new FormData(form),
+  evento.preventDefault();
+
+  // Validar que haya elegido un paquete
+  if (!paqueteOculto || !paqueteOculto.value) {
+    estado.textContent = "Por favor elige un paquete antes de enviar.";
+    return;
+  }
+
+  if (!site.formspreeEndpoint || site.formspreeEndpoint.startsWith("REEMPLAZAR")) {
+    estado.textContent = "El formulario todavía no está conectado. Configura formspreeEndpoint en data/site.json (ver README).";
+    return;
+  }
+
+  estado.textContent = "Enviando...";
+  try {
+    const respuesta = await fetch(site.formspreeEndpoint, {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: new FormData(form),
+    });
+    if (respuesta.ok) {
+      estado.textContent = "¡Gracias! Tu inscripción fue enviada.";
+      form.reset();
+
+      // Limpiar los botones de paquete
+      selectorPaquetes?.querySelectorAll(".boton-paquete").forEach(b => {
+        b.classList.remove("activo");
+        b.setAttribute("aria-checked", "false");
       });
-      if (respuesta.ok) {
-        estado.textContent = "¡Gracias! Tu inscripción fue enviada.";
-        form.reset();
-      } else {
-        estado.textContent = "Hubo un problema al enviar. Intenta de nuevo o escríbenos por WhatsApp.";
-      }
-    } catch {
+      paqueteOculto.value = "";
+    } else {
       estado.textContent = "Hubo un problema al enviar. Intenta de nuevo o escríbenos por WhatsApp.";
     }
-  });
+  } catch {
+    estado.textContent = "Hubo un problema al enviar. Intenta de nuevo o escríbenos por WhatsApp.";
+  }
+});
 })();
 
 // --- Menú móvil ---
