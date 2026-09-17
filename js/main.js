@@ -312,7 +312,7 @@ if (actual) {
   }
 }
 
-}
+
 
   // --- Estadísticas, fogata, scroll-reveal y navegación activa ---
   iniciarStats(site.estadisticas);

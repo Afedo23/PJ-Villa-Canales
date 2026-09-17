@@ -1131,12 +1131,3 @@ html.cursor-personalizado textarea {
 }
 
 
-@keyframes pulso-paquete {
-  0%   { box-shadow: 0 0 0 0 rgba(199, 107, 31, 0.5); }
-  70%  { box-shadow: 0 0 0 10px rgba(199, 107, 31, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(199, 107, 31, 0); }
-}
-
-.boton-paquete.activo {
-  animation: pulso-paquete 1s ease-out;
-}
