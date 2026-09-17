@@ -848,3 +848,112 @@ html.cursor-personalizado textarea {
   text-justify: inter-word;
   hyphens: auto;
 }
+
+
+/* --- Sección de precios --- */
+.seccion-precios {
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  color: #fff;
+  padding: 80px 0;
+}
+
+.precios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.precio-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.precio-card:hover {
+  transform: translateY(-6px);
+  border-color: #e8a33d;
+}
+
+.precio-card.destacado {
+  border-color: #e8a33d;
+  background: rgba(232, 163, 61, 0.1);
+  box-shadow: 0 0 30px rgba(232, 163, 61, 0.2);
+}
+
+.precio-etiqueta {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #e8a33d;
+  color: #1a1a2e;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.precio-card h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.precio-monto {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #e8a33d;
+  margin: 0.5rem 0 1.2rem;
+}
+
+.precio-card ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.precio-card ul li {
+  padding: 0.4rem 0;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.precio-card ul li::before {
+  content: "✓ ";
+  color: #e8a33d;
+  font-weight: bold;
+}
+
+.precios-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+}
+
+.precio-info-bloque h4 {
+  font-family: 'Fraunces', serif;
+  color: #e8a33d;
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+}
+
+.precio-info-bloque ul {
+  list-style: none;
+  padding: 0;
+}
+
+.precio-info-bloque ul li {
+  padding: 0.3rem 0;
+  font-size: 0.95rem;
+}

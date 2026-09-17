@@ -6,7 +6,31 @@
     "anio": 2026,
     "esActual": true,
     "logo": "images/logo/2026.png",
-    "descripcion": "Reemplaza este texto con la descripción del campamento de este año: el lugar, la fecha, el costo y a quién está dirigido. Este es el campamento que se está promocionando ahora mismo en la página principal.",
+    "descripcion": "...",
+    "lugar": "Finca El Paraíso, Villa Canales",
+    "fechasPago": [
+      { "fecha": "15 de marzo", "detalle": "Primer pago" },
+      { "fecha": "15 de abril", "detalle": "Segundo pago" },
+      { "fecha": "15 de mayo", "detalle": "Pago final" }
+    ],
+    "montoReserva": "Q150",
+    "paquetes": [
+      {
+        "nombre": "Paquete Básico",
+        "precio": "Q350",
+        "incluye": ["Alimentación", "Hospedaje", "Materiales"]
+      },
+      {
+        "nombre": "Paquete Completo",
+        "precio": "Q500",
+        "incluye": ["Alimentación", "Hospedaje", "Materiales", "Transporte", "Camiseta"]
+      },
+      {
+        "nombre": "Paquete Premium",
+        "precio": "Q700",
+        "incluye": ["Todo lo anterior", "Habitación privada", "Kit de bienvenida"]
+      }
+    ],
     "fotos": [
       "images/historias/2026/261.jpeg",
       "images/historias/2026/262.jpeg",

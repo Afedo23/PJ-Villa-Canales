@@ -37,6 +37,14 @@
       <h1 id="heroNombre">Campamento</h1>
       <p class="hero-slogan" id="heroSlogan">Slogan del campamento</p>
       <p class="hero-descripcion" id="heroDescripcion">Descripción del campamento de este año.</p>
+      <section class="seccion seccion-precios" id="precios">
+        <div class="contenedor revelar">
+          <h2 class="titulo-seccion">Paquetes e inscripción</h2>
+          <p class="subtitulo-seccion" id="preciosSubtitulo"></p>
+          <div class="precios-grid" id="preciosGrid"></div>
+          <div class="precios-info revelar" id="preciosInfo"></div>
+        </div>
+      </section>
       <div class="hero-acciones">
         <a href="#contacto" class="boton boton-ascua">Inscríbete este año</a>
         <a href="#campamentos" class="boton boton-fantasma">Ver campamentos anteriores</a>
@@ -113,6 +121,12 @@
       <div>
         <label for="mensaje">Mensaje (opcional)</label>
         <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos si vienes solo, con tu grupo, si es tu primer campamento..."></textarea>
+      </div>
+      <div>
+        <label for="paquete">Paquete de interés</label>
+        <select id="paquete" name="paquete">
+          <option value="">Selecciona un paquete</option>
+        </select>
       </div>
       <button type="submit" class="boton boton-ascua">Enviar inscripción</button>
       <p id="estadoFormulario" style="font-size:0.9rem;"></p>

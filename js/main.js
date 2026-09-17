@@ -198,6 +198,9 @@ function iniciarCarruselTestimonios(testimonios) {
     document.getElementById("heroAnio").textContent = actual.anio;
   }
 
+  // --- Sección de precios del campamento actual ---
+
+
   // --- Misión, visión, objetivos ---
   const conNegritas = (texto) => texto.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 
@@ -219,6 +222,58 @@ function iniciarCarruselTestimonios(testimonios) {
   // --- Testimonios (tomados de todos los campamentos) ---
   const todosLosTestimonios = campamentos.flatMap(c => c.testimonios || []);
   iniciarCarruselTestimonios(todosLosTestimonios);
+
+  if (actual) {
+  const preciosGrid = document.getElementById("preciosGrid");
+  const preciosInfo = document.getElementById("preciosInfo");
+  const preciosSubtitulo = document.getElementById("preciosSubtitulo");
+  const selectorPaquete = document.getElementById("paquete");
+
+  if (preciosSubtitulo) {
+    preciosSubtitulo.textContent = `Lugar: ${actual.lugar || "Por confirmar"}`;
+  }
+
+  // Tarjetas de paquetes
+  if (preciosGrid && actual.paquetes && actual.paquetes.length > 0) {
+    actual.paquetes.forEach((paq, i) => {
+      const card = document.createElement("div");
+      card.className = "precio-card" + (i === 1 ? " destacado" : "");
+      card.innerHTML = `
+        ${i === 1 ? '<span class="precio-etiqueta">Más elegido</span>' : ""}
+        <h3>${paq.nombre}</h3>
+        <p class="precio-monto">${paq.precio}</p>
+        <ul>${paq.incluye.map(item => `<li>${item}</li>`).join("")}</ul>
+        <a href="#contacto" class="boton boton-ascua">Inscribirme</a>
+      `;
+      preciosGrid.appendChild(card);
+
+      // Llenar el select del formulario
+      if (selectorPaquete) {
+        const opt = document.createElement("option");
+        opt.value = paq.nombre;
+        opt.textContent = `${paq.nombre} — ${paq.precio}`;
+        selectorPaquete.appendChild(opt);
+      }
+    });
+  }
+
+  // Información de fechas y reserva
+  if (preciosInfo) {
+    const fechas = (actual.fechasPago || [])
+      .map(f => `<li><strong>${f.fecha}:</strong> ${f.detalle}</li>`)
+      .join("");
+    preciosInfo.innerHTML = `
+      <div class="precio-info-bloque">
+        <h4>Fechas de pago</h4>
+        <ul>${fechas || "<li>Por confirmar</li>"}</ul>
+      </div>
+      <div class="precio-info-bloque">
+        <h4>Para reservar tu lugar</h4>
+        <p>Aparta con <strong>${actual.montoReserva || "Q150"}</strong> y asegura tu cupo.</p>
+      </div>
+    `;
+  }
+}
 
   // --- Estadísticas, fogata, scroll-reveal y navegación activa ---
   iniciarStats(site.estadisticas);
