@@ -185,6 +185,10 @@ function iniciarCarruselTestimonios(testimonios) {
     cargarJSON("data/camps.json"),
   ]);
 
+  // --- Referencias globales que usa también el formulario ---
+  const selectorPaquetes = document.getElementById("selectorPaquetes");
+  const paqueteOculto = document.getElementById("paquete");
+
   // --- Hero: campamento marcado como actual (o el más reciente) ---
   const actual = campamentos.find(c => c.esActual) ||
     [...campamentos].sort((a, b) => b.anio - a.anio)[0];
@@ -198,9 +202,6 @@ function iniciarCarruselTestimonios(testimonios) {
     document.getElementById("heroAnio").textContent = actual.anio;
   }
 
-  // --- Sección de precios del campamento actual ---
-
-
   // --- Misión, visión, objetivos ---
   const conNegritas = (texto) => texto.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 
@@ -213,106 +214,101 @@ function iniciarCarruselTestimonios(testimonios) {
     listaObjetivos.appendChild(li);
   });
 
-  // --- Sendero de campamentos (ordenado del más reciente al más antiguo) ---
+  // --- Sendero de campamentos ---
   const sendero = document.getElementById("senderoCampamentos");
   [...campamentos]
     .sort((a, b) => b.anio - a.anio)
     .forEach(c => sendero.appendChild(crearTarjetaCampamento(c)));
 
-  // --- Testimonios (tomados de todos los campamentos) ---
+  // --- Testimonios ---
   const todosLosTestimonios = campamentos.flatMap(c => c.testimonios || []);
   iniciarCarruselTestimonios(todosLosTestimonios);
 
-// --- Sección de precios del campamento actual ---
-if (actual) {
-  const preciosGrid = document.getElementById("preciosGrid");
-  const preciosInfo = document.getElementById("preciosInfo");
-  const preciosSubtitulo = document.getElementById("preciosSubtitulo");
-  const selectorPaquetes = document.getElementById("selectorPaquetes");
-  const paqueteOculto = document.getElementById("paquete");
+  // --- Sección de precios del campamento actual ---
+  if (actual) {
+    const preciosGrid = document.getElementById("preciosGrid");
+    const preciosInfo = document.getElementById("preciosInfo");
+    const preciosSubtitulo = document.getElementById("preciosSubtitulo");
 
-  if (preciosSubtitulo) {
-    preciosSubtitulo.textContent = "Elige el paquete que mejor se adapte a ti. Todos incluyen acceso completo al campamento.";
-  }
+    if (preciosSubtitulo) {
+      preciosSubtitulo.textContent = "Elige el paquete que mejor se adapte a ti. Todos incluyen acceso completo al campamento.";
+    }
 
-  const paquetes = actual.paquetes || [];
+    const paquetes = actual.paquetes || [];
 
-  // 1) Primero, crear los botones del formulario (sin listener de tarjeta)
-  if (selectorPaquetes && paquetes.length > 0) {
-    paquetes.forEach(paq => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "boton-paquete";
-      btn.dataset.valor = paq.nombre;
-      btn.setAttribute("role", "radio");
-      btn.setAttribute("aria-checked", "false");
-      btn.innerHTML = `
-        <span class="nombre-paquete">${paq.nombre}</span>
-        <span class="precio-paquete">${paq.precio}</span>
-      `;
-      btn.addEventListener("click", () => {
-        selectorPaquetes.querySelectorAll(".boton-paquete").forEach(b => {
-          b.classList.remove("activo");
-          b.setAttribute("aria-checked", "false");
+    // 1) Botones del formulario
+    if (selectorPaquetes && paquetes.length > 0) {
+      paquetes.forEach(paq => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "boton-paquete";
+        btn.dataset.valor = paq.nombre;
+        btn.setAttribute("role", "radio");
+        btn.setAttribute("aria-checked", "false");
+        btn.innerHTML = `
+          <span class="nombre-paquete">${paq.nombre}</span>
+          <span class="precio-paquete">${paq.precio}</span>
+        `;
+        btn.addEventListener("click", () => {
+          selectorPaquetes.querySelectorAll(".boton-paquete").forEach(b => {
+            b.classList.remove("activo");
+            b.setAttribute("aria-checked", "false");
+          });
+          btn.classList.add("activo");
+          btn.setAttribute("aria-checked", "true");
+          paqueteOculto.value = paq.nombre;
         });
-        btn.classList.add("activo");
-        btn.setAttribute("aria-checked", "true");
-        paqueteOculto.value = paq.nombre;
+        selectorPaquetes.appendChild(btn);
       });
-      selectorPaquetes.appendChild(btn);
-    });
-  }
+    }
 
-  // 2) Luego, crear las tarjetas de precio con su botón "Inscribirme"
-  if (preciosGrid && paquetes.length > 0) {
-    paquetes.forEach((paq, i) => {
-      const card = document.createElement("div");
-      card.className = "precio-card" + (i === 1 ? " destacado" : "");
-      card.innerHTML = `
-        ${i === 1 ? '<span class="precio-etiqueta">Más elegido</span>' : ""}
-        <h3>${paq.nombre}</h3>
-        <p class="precio-monto">${paq.precio}</p>
-        <ul>${paq.incluye.map(item => `<li>${item}</li>`).join("")}</ul>
-        <a href="#contacto" class="boton boton-ascua" data-paquete="${paq.nombre}">Inscribirme</a>
-      `;
-      preciosGrid.appendChild(card);
+    // 2) Tarjetas de precio con botón "Inscribirme"
+    if (preciosGrid && paquetes.length > 0) {
+      paquetes.forEach((paq, i) => {
+        const card = document.createElement("div");
+        card.className = "precio-card" + (i === 1 ? " destacado" : "");
+        card.innerHTML = `
+          ${i === 1 ? '<span class="precio-etiqueta">Más elegido</span>' : ""}
+          <h3>${paq.nombre}</h3>
+          <p class="precio-monto">${paq.precio}</p>
+          <ul>${paq.incluye.map(item => `<li>${item}</li>`).join("")}</ul>
+          <a href="#contacto" class="boton boton-ascua" data-paquete="${paq.nombre}">Inscribirme</a>
+        `;
+        preciosGrid.appendChild(card);
 
-      // Al hacer clic, se preselecciona ese paquete
-      card.querySelector("[data-paquete]").addEventListener("click", () => {
-        if (!selectorPaquetes || !paqueteOculto) return;
-        selectorPaquetes.querySelectorAll(".boton-paquete").forEach(b => {
-          const coincide = b.dataset.valor === paq.nombre;
-          b.classList.toggle("activo", coincide);
-          b.setAttribute("aria-checked", coincide ? "true" : "false");
+        card.querySelector("[data-paquete]").addEventListener("click", () => {
+          if (!selectorPaquetes || !paqueteOculto) return;
+          selectorPaquetes.querySelectorAll(".boton-paquete").forEach(b => {
+            const coincide = b.dataset.valor === paq.nombre;
+            b.classList.toggle("activo", coincide);
+            b.setAttribute("aria-checked", coincide ? "true" : "false");
+          });
+          paqueteOculto.value = paq.nombre;
         });
-        paqueteOculto.value = paq.nombre;
       });
-    });
+    }
+
+    // 3) Info de fechas, reserva y lugar
+    if (preciosInfo) {
+      const fechas = (actual.fechasPago || [])
+        .map(f => `<li><strong>${f.fecha}:</strong> ${f.detalle}</li>`)
+        .join("");
+      preciosInfo.innerHTML = `
+        <div class="precio-info-bloque">
+          <h4>Fechas de pago</h4>
+          <ul>${fechas || "<li>Por confirmar</li>"}</ul>
+        </div>
+        <div class="precio-info-bloque">
+          <h4>Para reservar tu lugar</h4>
+          <p>Aparta con <strong>${actual.montoReserva || "Q150"}</strong> y asegura tu cupo.</p>
+        </div>
+        <div class="precio-info-bloque">
+          <h4>Lugar del campamento</h4>
+          <p>${actual.lugar || "Por confirmar"}</p>
+        </div>
+      `;
+    }
   }
-
-  // 3) Info de fechas, reserva y lugar
-  if (preciosInfo) {
-    const fechas = (actual.fechasPago || [])
-      .map(f => `<li><strong>${f.fecha}:</strong> ${f.detalle}</li>`)
-      .join("");
-    preciosInfo.innerHTML = `
-      <div class="precio-info-bloque">
-        <h4>Fechas de pago</h4>
-        <ul>${fechas || "<li>Por confirmar</li>"}</ul>
-      </div>
-      <div class="precio-info-bloque">
-        <h4>Para reservar tu lugar</h4>
-        <p>Aparta con <strong>${actual.montoReserva || "Q150"}</strong> y asegura tu cupo.</p>
-      </div>
-      <div class="precio-info-bloque">
-        <h4>Lugar del campamento</h4>
-        <p>${actual.lugar || "Por confirmar"}</p>
-      </div>
-    `;
-  }
-}
-
-
 
   // --- Estadísticas, fogata, scroll-reveal y navegación activa ---
   iniciarStats(site.estadisticas);
@@ -321,7 +317,8 @@ if (actual) {
   iniciarScrollSpy();
 
   // --- Contacto ---
-  document.getElementById("tituloContacto").textContent = `Inscríbete al ${actual ? actual.nombre : "campamento de este año"}`;
+  document.getElementById("tituloContacto").textContent =
+    `Inscríbete al ${actual ? actual.nombre : "campamento de este año"}`;
   document.getElementById("mensajeContacto").textContent = site.contacto.mensaje;
 
   const redes = [];
@@ -342,47 +339,59 @@ if (actual) {
   }
   document.getElementById("pieRedes").innerHTML = `<div class="fila-iconos-contacto">${redes.join("")}</div>`;
 
-  // --- Formulario: envía a Formspree si ya se configuró el endpoint ---
+  // --- Formulario: envía a Formspree ---
   const form = document.getElementById("formularioContacto");
   const estado = document.getElementById("estadoFormulario");
+
   form.addEventListener("submit", async (evento) => {
-  evento.preventDefault();
+    evento.preventDefault();
 
-  // Validar que haya elegido un paquete
-  if (!paqueteOculto || !paqueteOculto.value) {
-    estado.textContent = "Por favor elige un paquete antes de enviar.";
-    return;
-  }
-
-  if (!site.formspreeEndpoint || site.formspreeEndpoint.startsWith("REEMPLAZAR")) {
-    estado.textContent = "El formulario todavía no está conectado. Configura formspreeEndpoint en data/site.json (ver README).";
-    return;
-  }
-
-  estado.textContent = "Enviando...";
-  try {
-    const respuesta = await fetch(site.formspreeEndpoint, {
-      method: "POST",
-      headers: { Accept: "application/json" },
-      body: new FormData(form),
-    });
-    if (respuesta.ok) {
-      estado.textContent = "¡Gracias! Tu inscripción fue enviada.";
-      form.reset();
-
-      // Limpiar los botones de paquete
-      selectorPaquetes?.querySelectorAll(".boton-paquete").forEach(b => {
-        b.classList.remove("activo");
-        b.setAttribute("aria-checked", "false");
-      });
-      paqueteOculto.value = "";
-    } else {
-      estado.textContent = "Hubo un problema al enviar. Intenta de nuevo o escríbenos por WhatsApp.";
+    // Validar paquete
+    if (!paqueteOculto || !paqueteOculto.value) {
+      estado.textContent = "Por favor elige un paquete antes de enviar.";
+      return;
     }
-  } catch {
-    estado.textContent = "Hubo un problema al enviar. Intenta de nuevo o escríbenos por WhatsApp.";
-  }
-});
+
+    if (!site.formspreeEndpoint || site.formspreeEndpoint.startsWith("REEMPLAZAR")) {
+      estado.textContent = "El formulario todavía no está conectado. Configura formspreeEndpoint en data/site.json.";
+      return;
+    }
+
+    estado.textContent = "Enviando...";
+
+    const datos = new FormData(form);
+    // Forzar el valor del paquete por si el hidden no se incluye
+    datos.set("paquete", paqueteOculto.value);
+    // Formspree necesita _replyto para saber a quién responder
+    if (site.contacto.correo) datos.set("_replyto", site.contacto.correo);
+
+    try {
+      const respuesta = await fetch(site.formspreeEndpoint, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: datos,
+      });
+
+      console.log("Status:", respuesta.status);
+      const json = await respuesta.json();
+      console.log("Respuesta Formspree:", json);
+
+      if (respuesta.ok) {
+        estado.textContent = "¡Gracias! Tu inscripción fue enviada.";
+        form.reset();
+        selectorPaquetes?.querySelectorAll(".boton-paquete").forEach(b => {
+          b.classList.remove("activo");
+          b.setAttribute("aria-checked", "false");
+        });
+        paqueteOculto.value = "";
+      } else {
+        estado.textContent = "Error: " + (json.error || "revisa la consola");
+      }
+    } catch (err) {
+      console.error("Error al enviar:", err);
+      estado.textContent = "Hubo un problema al enviar. Revisa la consola.";
+    }
+  });
 })();
 
 // --- Menú móvil ---
