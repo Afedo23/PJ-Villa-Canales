@@ -2,33 +2,38 @@
   {
     "id": "2026",
     "nombre": "Campamento Configúrate",
-    "slogan": "Reemplazar con el slogan de este año",
+    "slogan": "No le preguntes a la IA, pregúntale a Jesús",
     "anio": 2026,
     "esActual": true,
     "logo": "images/campamentos/2026.png",
-    "descripcion": "...",
-    "lugar": "Entre Nubes y Montañas, San José Pinula",
+    "descripcion": "Kerigma es el encuentro de uno mismo desde la esencia que Dios nos da, al encontrarnos a nosotros mismos, ponemos a disposición de los demás nuestros dones y al mismo tiempo tengamos una relación genuina con Dios en el servicio a los otros, siempre siendo seres libres y auténticos.",
+    "lugar": "Entre Nubes y Montañas, Km 39.5, carretera a Mataquescuintla, desvío a Sanguayabá. Finca Las Nubes, San José Pinula",
     "fechasPago": [
-      { "fecha": "26 de Septimebre", "detalle": "Primer pago" },
-      { "fecha": "11 de Octubre", "detalle": "Segundo pago" },
-      { "fecha": "1 de Noviembre", "detalle": "Pago final" }
+      { "fecha": "27 de Septimebre", "detalle": "Reservar Cupo" },
+      { "fecha": "4 de Octubre", "detalle": "Reservar Cupo" },
+      { "fecha": "18 de Octubre", "detalle": "Primer Abono" },
+      { "fecha": "25 de Octubre", "detalle": "Primer Abono" },
+      { "fecha": "1 de Noviembre", "detalle": "Segundo Abono" },
+      { "fecha": "8 de Noviembre", "detalle": "Segundo Abono" },
+      { "fecha": "15 de Noviembre", "detalle": "Abono Final" },
+      { "fecha": "22 de Noviembre", "detalle": "Abono Final" }
     ],
     "montoReserva": "Q150",
     "paquetes": [
       {
         "nombre": "Paquete Reiníciate",
         "precio": "Q400",
-        "incluye": ["Alimentación", "Hospedaje", "Materiales"]
+        "incluye": ["Alimentación", "Materiales", "Transporte", "Hospedaje: Tienda de Acampar o Carpa Propia"]
       },
       {
         "nombre": "Paquete Reconectáte",
         "precio": "Q450",
-        "incluye": ["Alimentación", "Hospedaje", "Materiales", "Transporte", "Camiseta"]
+        "incluye": ["Alimentación", "Materiales", "Transporte", "Hospedaje: Tienda de Acampar o Carpa Brindada por Pastoral Juvenil"]
       },
       {
         "nombre": "Paquete Actualízate",
         "precio": "Q500",
-        "incluye": ["Todo lo anterior", "Habitación privada", "Kit de bienvenida"]
+        "incluye": ["Alimentación", "Materiales", "Transporte", "Hospedaje: Cabaña"]
       }
     ],
     "fotos": [
@@ -43,7 +48,20 @@
       "images/historias/2026/269.jpeg",
       "images/historias/2026/2610.jpeg"
     ],
-    "testimonios": []
+    "testimonios": [
+      {
+        "nombre": "Desconocido",
+        "texto": "¿Para cuándo otro?."
+      },
+      {
+        "nombre": "4le__lms",
+        "texto": "Wichito, nos quedas debiendo un campamento, no cambies el tema."
+      },
+      {
+        "nombre": "Desconocido",
+        "texto": "Aquí les traemos la respuesta a sus oraciones, simplemente regresamos a dar un servicio con Amor a Dios."
+      }
+    ]
   },
   {
     "id": "2023",
@@ -69,8 +87,8 @@
     ],
     "testimonios": [
       {
-        "nombre": "Nombre del joven",
-        "texto": "Reemplaza con el testimonio real de un joven que vivió este campamento."
+        "nombre": "anibal.yuman2512",
+        "texto": "Jerut, el primer campamento al que fui  y me ayudó a profundizar más mi encuentro con Jesús."
       }
     ]
   },
@@ -98,8 +116,8 @@
     ],
     "testimonios": [
       {
-        "nombre": "Nombre del joven",
-        "texto": "Reemplaza con el testimonio real de un joven que vivió este campamento."
+        "nombre": "pauldj.gt",
+        "texto": "Que bonitas experiencias en los campamentos."
       }
     ]
   },
@@ -127,8 +145,12 @@
     ],
     "testimonios": [
       {
-        "nombre": "Nombre del joven",
-        "texto": "Reemplaza con el testimonio real de un joven que vivió este campamento."
+        "nombre": "joselin_3dl",
+        "texto": "Recuerdo con mucho amor el campamento de Encandilados, fue el primer paso al cambio de mi vida."
+      },
+      {
+        "nombre": "jiromyjolon",
+        "texto": "en el 2021, Encandilados fue algo increible, el volver a interactuar con otros jóvenes enamorados de Jesús, hizo genial el campamento híbrido."
       }
     ]
   },
@@ -156,8 +178,8 @@
     ],
     "testimonios": [
       {
-        "nombre": "Nombre del joven",
-        "texto": "Reemplaza con el testimonio real de un joven que vivió este campamento."
+        "nombre": "luuu.cy._",
+        "texto": "Radicati la experiencia de conocer a Jesús en mi propia casa, donde más lo había olvidado el simplemente me recordó su amor presente en la pandemia."
       }
     ]
   },
@@ -185,8 +207,8 @@
     ],
     "testimonios": [
       {
-        "nombre": "Nombre del joven",
-        "texto": "Reemplaza con el testimonio real de un joven que vivió este campamento."
+        "nombre": "ale_sdl17",
+        "texto": "2019por ser el primero al que asistí , y ver las luces flotantes fue maravilloso."
       }
     ]
   },
@@ -214,8 +236,8 @@
     ],
     "testimonios": [
       {
-        "nombre": "Nombre del joven",
-        "texto": "Reemplaza con el testimonio real de un joven que vivió este campamento."
+        "nombre": "_solis.maf14",
+        "texto": "Centinelas, fue el primer campamento en el que serví y no tiene comparación encontrar el amor a Jesús en entregarse a los demás."
       }
     ]
   },
@@ -243,8 +265,8 @@
     ],
     "testimonios": [
       {
-        "nombre": "Nombre del joven",
-        "texto": "Reemplaza con el testimonio real de un joven que vivió este campamento."
+        "nombre": "wicho._.99",
+        "texto": "Aunque el frío fue intenso, jamás se olvidará la cristoteca que hizo que todos alabaran a un mismo Jesús joven y alegre."
       }
     ]
   },
@@ -272,8 +294,8 @@
     ],
     "testimonios": [
       {
-        "nombre": "Nombre del joven",
-        "texto": "Reemplaza con el testimonio real de un joven que vivió este campamento."
+        "nombre": "maferreyes33",
+        "texto": "No hubo nada de sol durante el campamento y en el único momento que hubo no dejaron pasar la experiencia de vivir un rally de Pastoral Juvenil, cocinar ese pescado sigue en mi memoria."
       }
     ]
   },
@@ -301,8 +323,8 @@
     ],
     "testimonios": [
       {
-        "nombre": "Nombre del joven",
-        "texto": "Reemplaza con el testimonio real de un joven que vivió este campamento."
+        "nombre": "_.carlosbarrientos",
+        "texto": "El lodo, el bus desconpuesto, los protestantes y sus intervenciones, son algo que jamás olvidare sobre todo el no tener nada para ayudarte y encontrar a Jesús desde tu humanidad será el recuerdo en mi vida."
       }
     ]
   },
@@ -330,8 +352,8 @@
     ],
     "testimonios": [
       {
-        "nombre": "Nombre del joven",
-        "texto": "Reemplaza con el testimonio real de un joven que vivió este campamento."
+        "nombre": "jose_3lem",
+        "texto": "Activarse y coonocer a mas Jóvenes enamorados de Jesús que no les importo el clima solo vivir ese encuentro personal con Dios alejado de todo lo que nos rodea y traer un poco de ese encuetro a los que tengo en mi corazón."
       }
     ]
   }

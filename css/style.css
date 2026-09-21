@@ -910,12 +910,12 @@ html.cursor-personalizado textarea {
 
 .precio-card:hover {
   transform: translateY(-6px);
-  border-color: #c76b1f;
+  border-color: #e29040;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
 .precio-card.destacado {
-  border: 2px solid #c76b1f;
+  border: 2px solid #e29040;
   box-shadow: 0 12px 30px rgba(199, 107, 31, 0.15);
 }
 
@@ -924,7 +924,7 @@ html.cursor-personalizado textarea {
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: #c76b1f;
+  background: #e29040;
   color: #fff;
   padding: 4px 14px;
   border-radius: 20px;
@@ -944,7 +944,7 @@ html.cursor-personalizado textarea {
 .precio-monto {
   font-size: 2rem;
   font-weight: 600;
-  color: #c76b1f;
+  color: #e29040;
   margin: 0.4rem 0 1.4rem;
 }
 
@@ -969,7 +969,7 @@ html.cursor-personalizado textarea {
 
 .precio-card ul li::before {
   content: "✓ ";
-  color: #c76b1f;
+  color: #e29040;
   font-weight: bold;
   margin-right: 4px;
 }
@@ -1003,7 +1003,7 @@ html.cursor-personalizado textarea {
 
 .precio-info-bloque h4 {
   font-family: 'Fraunces', serif;
-  color: #c76b1f;
+  color: #e29040;
   margin: 0 0 0.9rem;
   font-size: 1.15rem;
 }
@@ -1058,12 +1058,12 @@ html.cursor-personalizado textarea {
 }
 
 .boton-paquete:hover {
-  border-color: #c76b1f;
+  border-color: #e29040;
   transform: translateY(-2px);
 }
 
 .boton-paquete.activo {
-  border-color: #c76b1f;
+  border-color: #e29040;
   background: rgba(199, 107, 31, 0.1);
   box-shadow: 0 0 0 2px rgba(199, 107, 31, 0.2);
 }
@@ -1074,7 +1074,7 @@ html.cursor-personalizado textarea {
 
 .boton-paquete .precio-paquete {
   font-size: 0.85rem;
-  color: #c76b1f;
+  color: #e29040;
   font-weight: 600;
 }
 
@@ -1101,7 +1101,7 @@ html.cursor-personalizado textarea {
 .formulario input[type="tel"]:focus,
 .formulario textarea:focus {
   outline: none;
-  border-color: #c76b1f;
+  border-color: #e29040;
   box-shadow: 0 0 0 2px rgba(199, 107, 31, 0.2);
 }
 
@@ -1130,4 +1130,48 @@ html.cursor-personalizado textarea {
   font-size: 0.9rem;
 }
 
+
+
+.fila-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 0.88rem;
+  font-weight: 400;
+}
+.fila-checkbox input { width: auto; }
+
+.grupo-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin-top: 6px;
+}
+
+.fila-radio-si-no {
+  display: flex;
+  gap: 22px;
+  margin-top: 6px;
+  font-size: 0.95rem;
+}
+.fila-radio-si-no label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 400;
+}
+.fila-radio-si-no input { width: auto; }
+
+.campo-condicional[hidden] { display: none; }
+.campo-condicional { margin-top: 10px; }
+
+.subtitulo-formulario {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--ascua);
+  margin: 26px 0 -4px;
+  padding-top: 20px;
+  border-top: 1px solid var(--borde);
+}
 

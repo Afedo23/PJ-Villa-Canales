@@ -107,31 +107,150 @@
     <h2 class="titulo-seccion" id="tituloContacto">Inscríbete al campamento de este año</h2>
     <p class="subtitulo-seccion" id="mensajeContacto"></p>
     <form class="formulario" id="formularioContacto">
-      <div>
-        <label for="nombre">Nombre completo</label>
-        <input type="text" id="nombre" name="nombre" required>
-      </div>
-      <div>
-        <label for="edad">Edad</label>
-        <input type="number" id="edad" name="edad" min="10" max="99">
-      </div>
-      <div>
-        <label for="telefono">Teléfono / WhatsApp</label>
-        <input type="tel" id="telefono" name="telefono" required>
-      </div>
-      <div>
-        <label for="mensaje">Mensaje (opcional)</label>
-        <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos si vienes solo, con tu grupo, si es tu primer campamento..."></textarea>
-      </div>
-      <div class="campo-paquetes">
-        <label>Paquete de interés</label>
-        <div class="selector-paquetes" id="selectorPaquetes" role="radiogroup" aria-label="Selecciona tu paquete"></div>
-        <!-- Campo oculto que se envía con el formulario -->
-        <input type="hidden" id="paquete" name="paquete" required>
-      </div>
-      <button type="submit" class="boton boton-ascua">Enviar inscripción</button>
-      <p id="estadoFormulario" style="font-size:0.9rem;"></p>
-    </form>
+  <input type="hidden" id="fechaInscripcion" name="fecha_inscripcion">
+
+  <div>
+    <label for="nombre">Nombre completo</label>
+    <input type="text" id="nombre" name="nombre" required>
+  </div>
+
+  <div>
+    <label for="fechaNacimiento">Fecha de nacimiento</label>
+    <input type="date" id="fechaNacimiento" name="fecha_nacimiento" required>
+  </div>
+
+  <div>
+    <label for="direccion">Dirección</label>
+    <input type="text" id="direccion" name="direccion" required>
+  </div>
+
+  <div>
+    <label for="correo">Correo electrónico</label>
+    <input type="email" id="correo" name="correo"
+           pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+           title="Escribe un correo válido, ej: nombre@dominio.com" required>
+  </div>
+
+  <div>
+    <label for="telefono">Teléfono</label>
+    <input type="tel" id="telefono" name="telefono" required>
+    <label class="fila-checkbox">
+      <input type="checkbox" name="telefono_whatsapp" value="Sí">
+      Este número tiene WhatsApp
+    </label>
+  </div>
+
+  <div>
+    <label for="tallaPlayera">Talla de playera</label>
+    <select id="tallaPlayera" name="talla_playera" required>
+      <option value="" disabled selected>Selecciona una talla</option>
+      <option value="XS">XS</option>
+      <option value="S">S</option>
+      <option value="M">M</option>
+      <option value="L">L</option>
+      <option value="XL">XL</option>
+      <option value="XXL">XXL</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="grupo">Grupo al que pertenece</label>
+    <input type="text" id="grupo" name="grupo" placeholder="Ej: Luz y Vida">
+  </div>
+
+  <div>
+    <label for="aniosPerseverancia">Años de perseverancia</label>
+    <input type="number" id="aniosPerseverancia" name="anios_perseverancia" min="0" max="80">
+  </div>
+
+  <div>
+    <label>Sacramentos recibidos</label>
+    <div class="grupo-checkboxes">
+      <label class="fila-checkbox">
+        <input type="checkbox" name="sacramento_bautismo" value="Sí"> Bautismo
+      </label>
+      <label class="fila-checkbox">
+        <input type="checkbox" name="sacramento_primera_comunion" value="Sí"> Primera Comunión
+      </label>
+      <label class="fila-checkbox">
+        <input type="checkbox" name="sacramento_confirmacion" value="Sí"> Confirmación
+      </label>
+    </div>
+  </div>
+
+  <div class="pregunta-si-no" data-condicional="enfermedadEspecificar">
+    <label>¿Padece alguna enfermedad?</label>
+    <div class="fila-radio-si-no">
+      <label><input type="radio" name="enfermedad_padece" value="Sí" required> Sí</label>
+      <label><input type="radio" name="enfermedad_padece" value="No"> No</label>
+    </div>
+    <input type="text" id="enfermedadEspecificar" name="enfermedad_especificar" placeholder="¿Cuál?" class="campo-condicional" hidden>
+  </div>
+
+  <div class="pregunta-si-no" data-condicional="medicamentoEspecificar">
+    <label>¿Toma algún medicamento?</label>
+    <div class="fila-radio-si-no">
+      <label><input type="radio" name="medicamento_toma" value="Sí" required> Sí</label>
+      <label><input type="radio" name="medicamento_toma" value="No"> No</label>
+    </div>
+    <input type="text" id="medicamentoEspecificar" name="medicamento_especificar" placeholder="¿Cuál?" class="campo-condicional" hidden>
+  </div>
+
+  <div class="pregunta-si-no" data-condicional="alergiaEspecificar">
+    <label>¿Es alérgico a algo?</label>
+    <div class="fila-radio-si-no">
+      <label><input type="radio" name="alergia_tiene" value="Sí" required> Sí</label>
+      <label><input type="radio" name="alergia_tiene" value="No"> No</label>
+    </div>
+    <input type="text" id="alergiaEspecificar" name="alergia_especificar" placeholder="¿A qué?" class="campo-condicional" hidden>
+  </div>
+
+  <h3 class="subtitulo-formulario">Datos del padre</h3>
+
+  <div>
+    <label for="padreNombre">Nombre completo del padre</label>
+    <input type="text" id="padreNombre" name="padre_nombre">
+  </div>
+
+  <div>
+    <label for="padreTelefono">Teléfono del padre</label>
+    <input type="tel" id="padreTelefono" name="padre_telefono">
+    <label class="fila-checkbox">
+      <input type="checkbox" name="padre_whatsapp" value="Sí">
+      Este número tiene WhatsApp
+    </label>
+  </div>
+
+  <h3 class="subtitulo-formulario">Datos de la madre</h3>
+
+  <div>
+    <label for="madreNombre">Nombre completo de la madre</label>
+    <input type="text" id="madreNombre" name="madre_nombre">
+  </div>
+
+  <div>
+    <label for="madreTelefono">Teléfono de la madre</label>
+    <input type="tel" id="madreTelefono" name="madre_telefono">
+    <label class="fila-checkbox">
+      <input type="checkbox" name="madre_whatsapp" value="Sí">
+      Este número tiene WhatsApp
+    </label>
+  </div>
+
+  <div class="campo-paquetes">
+    <label>Paquete de interés</label>
+    <div class="selector-paquetes" id="selectorPaquetes" role="radiogroup" aria-label="Selecciona tu paquete"></div>
+    <input type="hidden" id="paquete" name="paquete" required>
+  </div>
+
+  <div>
+    <label for="mensaje">Mensaje (opcional)</label>
+    <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos si vienes solo, con tu grupo, si es tu primer campamento..."></textarea>
+  </div>
+
+  <button type="submit" class="boton boton-ascua">Enviar inscripción</button>
+  <p id="estadoFormulario" style="font-size:0.9rem;"></p>
+</form>
   </div>
 </section>
 

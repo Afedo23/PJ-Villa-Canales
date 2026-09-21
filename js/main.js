@@ -343,6 +343,23 @@ function iniciarCarruselTestimonios(testimonios) {
   const form = document.getElementById("formularioContacto");
   const estado = document.getElementById("estadoFormulario");
 
+    // Fecha de inscripción automática (no la llena el usuario)
+  document.getElementById("fechaInscripcion").value = new Date().toISOString().slice(0, 10);
+
+  // Mostrar el campo "especificar" solo cuando responden "Sí"
+  document.querySelectorAll(".pregunta-si-no").forEach(bloque => {
+    const campo = document.getElementById(bloque.dataset.condicional);
+    if (!campo) return;
+    bloque.querySelectorAll('input[type="radio"]').forEach(radio => {
+      radio.addEventListener("change", () => {
+        const mostrar = radio.value === "Sí" && radio.checked;
+        campo.hidden = !mostrar;
+        campo.toggleAttribute("required", mostrar);
+        if (!mostrar) campo.value = "";
+      });
+    });
+  });
+
   form.addEventListener("submit", async (evento) => {
     evento.preventDefault();
 
