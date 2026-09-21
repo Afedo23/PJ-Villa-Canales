@@ -201,7 +201,7 @@ a { color: inherit; }
 }
 
 .hero-descripcion {
-  max-width: 46ch;
+  max-width: 54ch;
   opacity: 0.92;
   margin: 0 0 30px;
 }
@@ -283,7 +283,7 @@ a { color: inherit; }
 }
 
 .subtitulo-seccion {
-  max-width: 62ch;
+  max-width: 70ch;
   opacity: 0.85;
   margin: 0 0 40px;
 }
@@ -862,6 +862,7 @@ html.cursor-personalizado textarea {
 .mv-bloque p,
 .lista-objetivos li,
 .tarjeta-campamento .contenido p,
+.hero-descripcion,
 #descripcionCampamento {
   text-align: justify;
   text-justify: inter-word;
