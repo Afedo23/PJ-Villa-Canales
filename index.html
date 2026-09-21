@@ -106,8 +106,21 @@
   <div class="contenedor revelar">
     <h2 class="titulo-seccion" id="tituloContacto">Inscríbete al campamento de este año</h2>
     <p class="subtitulo-seccion" id="mensajeContacto"></p>
+
+    <div class="progreso-formulario">
+      <div class="progreso-barra"><div class="progreso-relleno" id="progresoRelleno"></div></div>
+      <div class="progreso-pasos" id="progresoPasos">
+        <span class="progreso-paso activa" data-paso-num="1"><span class="progreso-icono">👤</span>Tus datos</span>
+        <span class="progreso-paso" data-paso-num="2"><span class="progreso-icono">⛪</span>Fe y salud</span>
+        <span class="progreso-paso" data-paso-num="3"><span class="progreso-icono">👨‍👩‍👧</span>Familia</span>
+        <span class="progreso-paso" data-paso-num="4"><span class="progreso-icono">🎒</span>Tu paquete</span>
+      </div>
+    </div>
+
     <form class="formulario" id="formularioContacto">
   <input type="hidden" id="fechaInscripcion" name="fecha_inscripcion">
+
+  <div class="paso-formulario activo" data-paso="1">
 
   <div>
     <label for="nombre">Nombre completo</label>
@@ -139,6 +152,10 @@
       Este número tiene WhatsApp
     </label>
   </div>
+
+  </div>
+
+  <div class="paso-formulario" data-paso="2">
 
   <div>
     <label for="tallaPlayera">Talla de playera</label>
@@ -205,6 +222,10 @@
     <input type="text" id="alergiaEspecificar" name="alergia_especificar" placeholder="¿A qué?" class="campo-condicional" hidden>
   </div>
 
+  </div>
+
+  <div class="paso-formulario" data-paso="3">
+
   <h3 class="subtitulo-formulario">Datos del padre</h3>
 
   <div>
@@ -237,6 +258,10 @@
     </label>
   </div>
 
+  </div>
+
+  <div class="paso-formulario" data-paso="4">
+
   <div class="campo-paquetes">
     <label>Paquete de interés</label>
     <div class="selector-paquetes" id="selectorPaquetes" role="radiogroup" aria-label="Selecciona tu paquete"></div>
@@ -248,7 +273,13 @@
     <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos si vienes solo, con tu grupo, si es tu primer campamento..."></textarea>
   </div>
 
-  <button type="submit" class="boton boton-ascua">Enviar inscripción</button>
+  </div>
+
+  <div class="controles-paso">
+    <button type="button" class="boton boton-fantasma" id="botonAtras" hidden>← Atrás</button>
+    <button type="button" class="boton boton-ascua" id="botonSiguiente">Siguiente →</button>
+    <button type="submit" class="boton boton-ascua" id="botonEnviar" hidden>Enviar inscripción</button>
+  </div>
   <p id="estadoFormulario" style="font-size:0.9rem;"></p>
 </form>
   </div>
@@ -262,6 +293,7 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/pasos-formulario.js"></script>
 <script src="js/interacciones.js"></script>
 </body>
 </html>

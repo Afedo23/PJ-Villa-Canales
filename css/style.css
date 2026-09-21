@@ -1175,3 +1175,99 @@ html.cursor-personalizado textarea {
   border-top: 1px solid var(--borde);
 }
 
+
+/* ============================================
+   Formulario por pasos (wizard)
+   ============================================ */
+
+.progreso-formulario { margin: 28px 0 34px; }
+
+.progreso-barra {
+  height: 6px;
+  background: var(--borde);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progreso-relleno {
+  height: 100%;
+  width: 25%;
+  background: linear-gradient(90deg, var(--ascua), var(--oro));
+  border-radius: 4px;
+  transition: width 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.progreso-pasos {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  gap: 6px;
+}
+.progreso-paso {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  text-align: center;
+  opacity: 0.45;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  flex: 1;
+}
+.progreso-paso.activa { opacity: 1; transform: translateY(-2px); }
+.progreso-paso.completada { opacity: 0.85; }
+.progreso-icono {
+  font-size: 1.3rem;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--papel-2);
+  border: 1px solid var(--borde);
+}
+.progreso-paso.activa .progreso-icono {
+  background: var(--ascua);
+  border-color: var(--ascua);
+  box-shadow: 0 0 0 4px rgba(193,68,14,0.18);
+}
+.progreso-paso.completada .progreso-icono { background: var(--verde-monte); border-color: var(--verde-monte); }
+
+@media (max-width: 560px) {
+  .progreso-paso span:last-child { display: none; }
+}
+
+.paso-formulario {
+  display: none;
+  animation: entrada-paso 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.paso-formulario.activo { display: grid; gap: 14px; }
+
+@keyframes entrada-paso {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .paso-formulario { animation: none; }
+}
+
+.controles-paso {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+}
+.controles-paso .boton:only-child { margin-left: auto; }
+
+/* --- Confeti de celebración al enviar --- */
+.pieza-confeti {
+  position: fixed;
+  top: -20px;
+  width: 9px;
+  height: 14px;
+  z-index: 9996;
+  pointer-events: none;
+  animation: caer-confeti linear forwards;
+}
+@keyframes caer-confeti {
+  to { transform: translateY(105vh) rotate(540deg); opacity: 0.3; }
+}
