@@ -1,299 +1,421 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pastoral Juvenil — Parroquia San Joaquín, Villa Canales</title>
-<meta name="description" content="Pastoral Juvenil de la Parroquia San Joaquín, Villa Canales: misión, visión, objetivos y campamentos juveniles.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;1,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<script src="js/transicion.js"></script>
+// Carga los datos desde /data/site.json y /data/camps.json
+// y arma toda la página principal. Para cambiar textos o
+// campamentos, edita esos dos archivos JSON — no hace falta
+// tocar este código.
 
-<header class="encabezado">
-  <div class="contenedor barra-nav">
-    <a href="#inicio" class="marca">
-      <span class="marco-logo marco-logo--nav">
-        <img src="images/logo/logo.png" alt="Logo Pastoral Juvenil">
+async function cargarJSON(ruta) {
+  const respuesta = await fetch(ruta);
+  return respuesta.json();
+}
+
+function crearTarjetaCampamento(campamento) {
+  const a = document.createElement("a");
+  a.className = "tarjeta-campamento";
+  a.href = `camps/camp.html?id=${encodeURIComponent(campamento.id)}`;
+  a.innerHTML = `
+        <div class="miniatura">
+      <span class="marco-logo marco-logo--tarjeta">
+        <img src="${campamento.logo}" alt="Logo ${campamento.nombre}">
       </span>
-      <span>Pastoral Juvenil</span>
-    </a>
-    <button class="boton-menu" id="botonMenu" aria-label="Abrir menú" aria-expanded="false">☰</button>
-    <ul class="nav-enlaces" id="navEnlaces">
-      <li><a href="#mision">Misión y visión</a></li>
-      <li><a href="#campamentos">Campamentos</a></li>
-      <li><a href="#testimonios">Testimonios</a></li>
-      <li><a href="#contacto">Inscríbete</a></li>
-    </ul>
-  </div>
-</header>
-
-<section class="hero" id="inicio">
-  <div class="contenedor hero-grid">
-    <div>
-      <p class="hero-etiqueta">Parroquia San Joaquín · Villa Canales</p>
-      <h1 id="heroNombre">Campamento</h1>
-      <p class="hero-slogan" id="heroSlogan">Slogan del campamento</p>
-      <p class="hero-descripcion" id="heroDescripcion">Descripción del campamento de este año.</p>
-      <div class="hero-acciones">
-        <a href="#contacto" class="boton boton-ascua">Inscríbete este año</a>
-        <a href="#campamentos" class="boton boton-fantasma">Ver campamentos anteriores</a>
-      </div>
     </div>
-    <div class="hero-logo-envoltura">
-      <img id="heroLogo" src="images/logo/logo.png" alt="Logo del campamento actual" data-parallax="0.06">
+    <div class="contenido">
+      ${campamento.esActual ? '<span class="etiqueta-actual">Campamento de este año</span>' : ""}
+      <h3>${campamento.nombre}</h3>
+      <p class="anio-slogan">${campamento.anio} · ${campamento.slogan}</p>
+      <p>${campamento.descripcion}</p>
     </div>
-  </div>
-  <div class="contenedor franja-stats" id="franjaStats"></div>
-  <p class="hero-anio" id="heroAnio"></p>
-  <div id="contenedorBrasas" aria-hidden="true"></div>
-</section>
+  `;
+  return a;
+}
 
- <section class="seccion seccion-precios" id="precios">
-        <div class="contenedor revelar">
-          <h2 class="titulo-seccion">Paquetes e inscripción</h2>
-          <p class="subtitulo-seccion" id="preciosSubtitulo"></p>
-          <div class="precios-grid" id="preciosGrid"></div>
-          <div class="precios-info revelar" id="preciosInfo"></div>
+function crearTarjetaTestimonio(testimonio) {
+  const div = document.createElement("div");
+  div.className = "testimonio";
+  div.innerHTML = `<p>"${testimonio.texto}"</p><span>${testimonio.nombre}</span>`;
+  return div;
+}
+
+// --- Fogata: brasas que suben en el hero (un solo efecto protagonista) ---
+function crearBrasas() {
+  const contenedor = document.getElementById("contenedorBrasas");
+  if (!contenedor) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const cantidad = window.innerWidth < 700 ? 10 : 18;
+  for (let i = 0; i < cantidad; i++) {
+    const brasa = document.createElement("span");
+    brasa.className = "brasa";
+    brasa.style.left = `${5 + Math.random() * 90}%`;
+    brasa.style.setProperty("--deriva", `${Math.random() * 60 - 30}px`);
+    brasa.style.animationDuration = `${5 + Math.random() * 5}s`;
+    brasa.style.animationDelay = `${Math.random() * 8}s`;
+    contenedor.appendChild(brasa);
+  }
+}
+
+// --- Franja de estadísticas con conteo ascendente ---
+function iniciarStats(estadisticas) {
+  const franja = document.getElementById("franjaStats");
+  if (!franja || !estadisticas || estadisticas.length === 0) return;
+  estadisticas.forEach(stat => {
+    const item = document.createElement("div");
+    item.className = "stat-item";
+    const soloDigitos = parseInt(stat.numero.replace(/\D/g, ""), 10);
+    item.innerHTML = `<div class="stat-numero" data-final="${soloDigitos || 0}" data-sufijo="${stat.numero.replace(/[0-9]/g, "")}">0</div><div class="stat-etiqueta">${stat.etiqueta}</div>`;
+    franja.appendChild(item);
+  });
+
+  const numeros = franja.querySelectorAll(".stat-numero");
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach(entrada => {
+      if (!entrada.isIntersecting) return;
+      numeros.forEach(el => {
+        const final = parseInt(el.dataset.final, 10);
+        const sufijo = el.dataset.sufijo || "";
+        if (!final) return;
+        const duracion = 1200;
+        const inicio = performance.now();
+        function paso(ahora) {
+          const avance = Math.min((ahora - inicio) / duracion, 1);
+          el.textContent = Math.floor(avance * final) + sufijo;
+          if (avance < 1) requestAnimationFrame(paso);
+        }
+        requestAnimationFrame(paso);
+      });
+      observador.disconnect();
+    });
+  }, { threshold: 0.4 });
+  observador.observe(franja);
+}
+
+// --- Revelado suave al hacer scroll ---
+function iniciarRevelado() {
+  const elementos = document.querySelectorAll(".revelar");
+  if (elementos.length === 0) return;
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach(entrada => {
+      if (entrada.isIntersecting) {
+        entrada.target.classList.add("visible");
+        observador.unobserve(entrada.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  elementos.forEach(el => observador.observe(el));
+}
+
+// --- Enlace activo en la barra de navegación según la sección visible ---
+function iniciarScrollSpy() {
+  const enlaces = [...document.querySelectorAll(".nav-enlaces a")];
+  if (enlaces.length === 0) return;
+  const secciones = enlaces
+    .map(a => document.querySelector(a.getAttribute("href")))
+    .filter(Boolean);
+  const observador = new IntersectionObserver((entradas) => {
+    entradas.forEach(entrada => {
+      const enlace = enlaces.find(a => a.getAttribute("href") === `#${entrada.target.id}`);
+      if (!enlace) return;
+      if (entrada.isIntersecting) {
+        enlaces.forEach(a => a.classList.remove("activo"));
+        enlace.classList.add("activo");
+      }
+    });
+  }, { threshold: 0.5 });
+  secciones.forEach(s => observador.observe(s));
+}
+
+// --- Carrusel de testimonios: fundido automático + controles manuales ---
+function iniciarCarruselTestimonios(testimonios) {
+  const carrusel = document.getElementById("testimoniosCarrusel");
+  const controles = document.getElementById("testimoniosControles");
+  const puntosContenedor = document.getElementById("testimoniosPuntos");
+  if (!carrusel) return;
+
+  if (!testimonios || testimonios.length === 0) {
+    carrusel.innerHTML = '<p style="opacity:0.7;">Todavía no hay testimonios cargados. Agrégalos en data/camps.json.</p>';
+    return;
+  }
+
+  testimonios.forEach((t, i) => {
+    const slide = document.createElement("div");
+    slide.className = "testimonio-slide" + (i === 0 ? " activo" : "");
+    slide.innerHTML = `<div class="testimonio"><p>"${t.texto}"</p><span>${t.nombre}</span></div>`;
+    carrusel.appendChild(slide);
+  });
+
+  if (testimonios.length === 1) return; // sin controles si hay uno solo
+
+  controles.style.display = "flex";
+  const slides = [...carrusel.querySelectorAll(".testimonio-slide")];
+  testimonios.forEach((_, i) => {
+    const punto = document.createElement("button");
+    punto.className = "punto" + (i === 0 ? " activo" : "");
+    punto.setAttribute("aria-label", `Ir al testimonio ${i + 1}`);
+    punto.addEventListener("click", () => irATestimonio(i));
+    puntosContenedor.appendChild(punto);
+  });
+  const puntos = [...puntosContenedor.children];
+
+  let actual = 0;
+  let temporizador;
+
+  function irATestimonio(indice) {
+    slides[actual].classList.remove("activo");
+    puntos[actual].classList.remove("activo");
+    actual = (indice + slides.length) % slides.length;
+    slides[actual].classList.add("activo");
+    puntos[actual].classList.add("activo");
+    reiniciarAutoplay();
+  }
+
+  function reiniciarAutoplay() {
+    clearInterval(temporizador);
+    temporizador = setInterval(() => irATestimonio(actual + 1), 6000);
+  }
+
+  document.getElementById("testimonioAnterior").addEventListener("click", () => irATestimonio(actual - 1));
+  document.getElementById("testimonioSiguiente").addEventListener("click", () => irATestimonio(actual + 1));
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    reiniciarAutoplay();
+  }
+}
+
+(async function iniciar() {
+  const [site, campamentos] = await Promise.all([
+    cargarJSON("data/site.json"),
+    cargarJSON("data/camps.json"),
+  ]);
+
+  // --- Referencias globales que usa también el formulario ---
+  const selectorPaquetes = document.getElementById("selectorPaquetes");
+  const paqueteOculto = document.getElementById("paquete");
+
+  // --- Hero: campamento marcado como actual (o el más reciente) ---
+  const actual = campamentos.find(c => c.esActual) ||
+    [...campamentos].sort((a, b) => b.anio - a.anio)[0];
+
+  if (actual) {
+    document.getElementById("heroNombre").textContent = actual.nombre;
+    document.getElementById("heroSlogan").textContent = actual.slogan;
+    document.getElementById("heroDescripcion").textContent = actual.descripcion;
+    document.getElementById("heroLogo").src = actual.logo;
+    document.getElementById("heroLogo").alt = `Logo ${actual.nombre}`;
+    document.getElementById("heroAnio").textContent = actual.anio;
+  }
+
+  // --- Misión, visión, objetivos ---
+  const conNegritas = (texto) => texto.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+
+  document.getElementById("textoMision").innerHTML = conNegritas(site.mision);
+  document.getElementById("textoVision").innerHTML = conNegritas(site.vision);
+  const listaObjetivos = document.getElementById("listaObjetivos");
+  site.objetivos.forEach(obj => {
+    const li = document.createElement("li");
+    li.innerHTML = conNegritas(obj);
+    listaObjetivos.appendChild(li);
+  });
+
+  // --- Sendero de campamentos ---
+  const sendero = document.getElementById("senderoCampamentos");
+  [...campamentos]
+    .sort((a, b) => b.anio - a.anio)
+    .forEach(c => sendero.appendChild(crearTarjetaCampamento(c)));
+
+  // --- Testimonios ---
+  const todosLosTestimonios = campamentos.flatMap(c => c.testimonios || []);
+  iniciarCarruselTestimonios(todosLosTestimonios);
+
+  // --- Sección de precios del campamento actual ---
+  if (actual) {
+    const preciosGrid = document.getElementById("preciosGrid");
+    const preciosInfo = document.getElementById("preciosInfo");
+    const preciosSubtitulo = document.getElementById("preciosSubtitulo");
+
+    if (preciosSubtitulo) {
+      preciosSubtitulo.textContent = "Elige el paquete que mejor se adapte a ti. Todos incluyen acceso completo al campamento.";
+    }
+
+    const paquetes = actual.paquetes || [];
+
+    // 1) Botones del formulario
+    if (selectorPaquetes && paquetes.length > 0) {
+      paquetes.forEach(paq => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "boton-paquete";
+        btn.dataset.valor = paq.nombre;
+        btn.setAttribute("role", "radio");
+        btn.setAttribute("aria-checked", "false");
+        btn.innerHTML = `
+          <span class="nombre-paquete">${paq.nombre}</span>
+          <span class="precio-paquete">${paq.precio}</span>
+        `;
+        btn.addEventListener("click", () => {
+          selectorPaquetes.querySelectorAll(".boton-paquete").forEach(b => {
+            b.classList.remove("activo");
+            b.setAttribute("aria-checked", "false");
+          });
+          btn.classList.add("activo");
+          btn.setAttribute("aria-checked", "true");
+          paqueteOculto.value = paq.nombre;
+        });
+        selectorPaquetes.appendChild(btn);
+      });
+    }
+
+    // 2) Tarjetas de precio con botón "Inscribirme"
+    if (preciosGrid && paquetes.length > 0) {
+      paquetes.forEach((paq, i) => {
+        const card = document.createElement("div");
+        card.className = "precio-card" + (i === 1 ? " destacado" : "");
+        card.innerHTML = `
+          ${i === 1 ? '<span class="precio-etiqueta">Más elegido</span>' : ""}
+          <h3>${paq.nombre}</h3>
+          <p class="precio-monto">${paq.precio}</p>
+          <ul>${paq.incluye.map(item => `<li>${item}</li>`).join("")}</ul>
+          <a href="#contacto" class="boton boton-ascua" data-paquete="${paq.nombre}">Inscribirme</a>
+        `;
+        preciosGrid.appendChild(card);
+
+        card.querySelector("[data-paquete]").addEventListener("click", () => {
+          if (!selectorPaquetes || !paqueteOculto) return;
+          selectorPaquetes.querySelectorAll(".boton-paquete").forEach(b => {
+            const coincide = b.dataset.valor === paq.nombre;
+            b.classList.toggle("activo", coincide);
+            b.setAttribute("aria-checked", coincide ? "true" : "false");
+          });
+          paqueteOculto.value = paq.nombre;
+        });
+      });
+    }
+
+    // 3) Info de fechas, reserva y lugar
+    if (preciosInfo) {
+      const fechas = (actual.fechasPago || [])
+        .map(f => `<li><strong>${f.fecha}:</strong> ${f.detalle}</li>`)
+        .join("");
+      preciosInfo.innerHTML = `
+        <div class="precio-info-bloque">
+          <h4>Fechas de pago</h4>
+          <ul>${fechas || "<li>Por confirmar</li>"}</ul>
         </div>
-      </section>
+        <div class="precio-info-bloque">
+          <h4>Para reservar tu lugar</h4>
+          <p>Aparta con <strong>${actual.montoReserva || "Q150"}</strong> y asegura tu cupo.</p>
+        </div>
+        <div class="precio-info-bloque">
+          <h4>Lugar del campamento</h4>
+          <p>${actual.lugar || "Por confirmar"}</p>
+        </div>
+      `;
+    }
+  }
 
-<section class="seccion" id="mision">
-  <div class="contenedor revelar">
-    <h2 class="titulo-seccion">Quiénes somos</h2>
-    <p class="subtitulo-seccion">La Pastoral Juvenil de San Joaquín camina para que la <strong>fe de hoy</strong> sea el <strong>servicio de mañana</strong>.</p>
-  </div>
-  <div class="contenedor mv-grid revelar">
-    <div class="mv-bloque">
-      <h3>Misión</h3>
-      <p id="textoMision"></p>
-    </div>
-    <div class="mv-bloque">
-      <h3>Visión</h3>
-      <p id="textoVision"></p>
-    </div>
-  </div>
-  <div class="contenedor objetivos-franja">
-    <h3>Objetivos</h3>
-    <ul class="lista-objetivos" id="listaObjetivos"></ul>
-  </div>
-</section>
+  // --- Estadísticas, fogata, scroll-reveal y navegación activa ---
+  iniciarStats(site.estadisticas);
+  crearBrasas();
+  iniciarRevelado();
+  iniciarScrollSpy();
 
-<section class="seccion seccion-papel-2" id="campamentos">
-  <div class="contenedor revelar">
-    <h2 class="titulo-seccion">Nuestros campamentos</h2>
-    <p class="subtitulo-seccion">Cada año queda su propia página, con su logo, su historia y las fotos de quienes lo vivieron. Entra a cada uno para conocerlo.</p>
-    <div class="sendero" id="senderoCampamentos"></div>
-  </div>
-</section>
+  // --- Contacto ---
+  document.getElementById("tituloContacto").textContent =
+    `Inscríbete al ${actual ? actual.nombre : "campamento de este año"}`;
+  document.getElementById("mensajeContacto").textContent = site.contacto.mensaje;
 
-<section class="seccion seccion-noche" id="testimonios">
-  <div class="contenedor revelar">
-    <h2 class="titulo-seccion">Lo que dicen los jóvenes</h2>
-    <p class="subtitulo-seccion">Testimonios de quienes ya vivieron un campamento con nosotros.</p>
-    <div class="testimonios-carrusel" id="testimoniosCarrusel"></div>
-    <div class="testimonios-controles" id="testimoniosControles" style="display:none;">
-      <button class="flecha-carrusel" id="testimonioAnterior" aria-label="Testimonio anterior">‹</button>
-      <div class="puntos-carrusel" id="testimoniosPuntos"></div>
-      <button class="flecha-carrusel" id="testimonioSiguiente" aria-label="Testimonio siguiente">›</button>
-    </div>
-  </div>
-</section>
+  const redes = [];
+  if (site.contacto.whatsapp && !site.contacto.whatsapp.startsWith("REEMPLAZAR")) {
+    redes.push(`<a class="icono-contacto" href="https://wa.me/${site.contacto.whatsapp}" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><img src="images/iconos/whatsapp.png" alt=""><span>WhatsApp</span></a>`);
+  }
+  if (site.contacto.facebook && !site.contacto.facebook.startsWith("REEMPLAZAR")) {
+    redes.push(`<a class="icono-contacto" href="${site.contacto.facebook}" target="_blank" rel="noopener" aria-label="Síguenos en Facebook"><img src="images/iconos/facebook.png" alt=""><span>Facebook</span></a>`);
+  }
+  if (site.contacto.instagram && !site.contacto.instagram.startsWith("REEMPLAZAR")) {
+    redes.push(`<a class="icono-contacto" href="${site.contacto.instagram}" target="_blank" rel="noopener" aria-label="Síguenos en Instagram"><img src="images/iconos/instagram.png" alt=""><span>Instagram</span></a>`);
+  }
+  if (site.contacto.correo && !site.contacto.correo.startsWith("REEMPLAZAR")) {
+    redes.push(`<a class="icono-contacto" href="mailto:${site.contacto.correo}" aria-label="Escríbenos por correo"><img src="images/iconos/gmail.png" alt=""><span>Gmail</span></a>`);
+  }
+  if (site.contacto.tiktok && !site.contacto.tiktok.startsWith("REEMPLAZAR")) {
+    redes.push(`<a class="icono-contacto" href="${site.contacto.tiktok}" target="_blank" rel="noopener" aria-label="Síguenos en TikTok"><img src="images/iconos/tiktok.png" alt=""><span>TikTok</span></a>`);
+  }
+  document.getElementById("pieRedes").innerHTML = `<div class="fila-iconos-contacto">${redes.join("")}</div>`;
 
-<section class="seccion" id="contacto">
-  <div class="contenedor revelar">
-    <h2 class="titulo-seccion" id="tituloContacto">Inscríbete al campamento de este año</h2>
-    <p class="subtitulo-seccion" id="mensajeContacto"></p>
+  // --- Formulario: envía a la hoja central (Google Apps Script) ---
+  const form = document.getElementById("formularioContacto");
+  const estado = document.getElementById("estadoFormulario");
 
-    <div class="progreso-formulario">
-      <div class="progreso-barra"><div class="progreso-relleno" id="progresoRelleno"></div></div>
-      <div class="progreso-pasos" id="progresoPasos">
-        <span class="progreso-paso activa" data-paso-num="1"><span class="progreso-icono">👤</span>Tus datos</span>
-        <span class="progreso-paso" data-paso-num="2"><span class="progreso-icono">⛪</span>Fe y salud</span>
-        <span class="progreso-paso" data-paso-num="3"><span class="progreso-icono">👨‍👩‍👧</span>Familia</span>
-        <span class="progreso-paso" data-paso-num="4"><span class="progreso-icono">🎒</span>Tu paquete</span>
-      </div>
-    </div>
+    // Fecha de inscripción automática (no la llena el usuario)
+  document.getElementById("fechaInscripcion").value = new Date().toISOString().slice(0, 10);
 
-    <form class="formulario" id="formularioContacto">
-  <input type="hidden" id="fechaInscripcion" name="fecha_inscripcion">
+  // Mostrar el campo "especificar" solo cuando responden "Sí"
+  document.querySelectorAll(".pregunta-si-no").forEach(bloque => {
+    const campo = document.getElementById(bloque.dataset.condicional);
+    if (!campo) return;
+    bloque.querySelectorAll('input[type="radio"]').forEach(radio => {
+      radio.addEventListener("change", () => {
+        const mostrar = radio.value === "Sí" && radio.checked;
+        campo.hidden = !mostrar;
+        campo.toggleAttribute("required", mostrar);
+        if (!mostrar) campo.value = "";
+      });
+    });
+  });
 
-  <div class="paso-formulario activo" data-paso="1">
+  form.addEventListener("submit", async (evento) => {
+    evento.preventDefault();
 
-  <div>
-    <label for="nombre">Nombre completo</label>
-    <input type="text" id="nombre" name="nombre" required>
-  </div>
+    // Validar paquete
+    if (!paqueteOculto || !paqueteOculto.value) {
+      estado.textContent = "Por favor elige un paquete antes de enviar.";
+      return;
+    }
 
-  <div>
-    <label for="fechaNacimiento">Fecha de nacimiento</label>
-    <input type="date" id="fechaNacimiento" name="fecha_nacimiento" required>
-  </div>
+    if (!site.inscripcionEndpoint || site.inscripcionEndpoint.startsWith("REEMPLAZAR")) {
+      estado.textContent = "El formulario todavía no está conectado. Configura inscripcionEndpoint en data/site.json.";
+      return;
+    }
 
-  <div>
-    <label for="direccion">Dirección</label>
-    <input type="text" id="direccion" name="direccion" required>
-  </div>
+    const botonEnviar = document.getElementById("botonEnviar");
+    botonEnviar.disabled = true;   // evita enviar dos veces la misma inscripción
+    estado.textContent = "Enviando tu inscripción...";
 
-  <div>
-    <label for="correo">Correo electrónico</label>
-    <input type="email" id="correo" name="correo"
-           pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
-           title="Escribe un correo válido, ej: nombre@dominio.com" required>
-  </div>
+    // Las casillas sin marcar no se envían; el servidor las toma como "No"
+    const datos = Object.fromEntries(new FormData(form).entries());
+    datos.paquete = paqueteOculto.value;
 
-  <div>
-    <label for="telefono">Teléfono</label>
-    <input type="tel" id="telefono" name="telefono" required>
-    <label class="fila-checkbox">
-      <input type="checkbox" name="telefono_whatsapp" value="Sí">
-      Este número tiene WhatsApp
-    </label>
-  </div>
+    try {
+      const respuesta = await fetch(site.inscripcionEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(datos),
+      });
+      const json = await respuesta.json();
 
-  </div>
+      if (json.ok) {
+        // OJO: pasos-formulario.js busca la palabra "Gracias" para lanzar el confeti
+        estado.textContent = json.id
+          ? `¡Gracias! Tu inscripción fue enviada. Tu ID de campista es ${json.id}. Revisa tu correo: ahí te llega tu ficha.`
+          : "¡Gracias! Tu inscripción fue enviada.";
+        form.reset();
+        selectorPaquetes?.querySelectorAll(".boton-paquete").forEach(b => {
+          b.classList.remove("activo");
+          b.setAttribute("aria-checked", "false");
+        });
+        paqueteOculto.value = "";
+      } else {
+        estado.textContent = "No se pudo enviar: " + (json.error || "intenta de nuevo.");
+      }
+    } catch (err) {
+      console.error("Error al enviar:", err);
+      estado.textContent = "Hubo un problema al enviar. Revisa tu conexión e intenta de nuevo.";
+    } finally {
+      botonEnviar.disabled = false;
+    }
+  });
+})();
 
-  <div class="paso-formulario" data-paso="2">
-
-  <div>
-    <label for="tallaPlayera">Talla de playera</label>
-    <select id="tallaPlayera" name="talla_playera" required>
-      <option value="" disabled selected>Selecciona una talla</option>
-      <option value="XS">XS</option>
-      <option value="S">S</option>
-      <option value="M">M</option>
-      <option value="L">L</option>
-      <option value="XL">XL</option>
-      <option value="XXL">XXL</option>
-    </select>
-  </div>
-
-  <div>
-    <label for="grupo">Grupo al que pertenece</label>
-    <input type="text" id="grupo" name="grupo" placeholder="Ej: Luz y Vida">
-  </div>
-
-  <div>
-    <label for="aniosPerseverancia">Años de perseverancia</label>
-    <input type="number" id="aniosPerseverancia" name="anios_perseverancia" min="0" max="80">
-  </div>
-
-  <div>
-    <label>Sacramentos recibidos</label>
-    <div class="grupo-checkboxes">
-      <label class="fila-checkbox">
-        <input type="checkbox" name="sacramento_bautismo" value="Sí"> Bautismo
-      </label>
-      <label class="fila-checkbox">
-        <input type="checkbox" name="sacramento_primera_comunion" value="Sí"> Primera Comunión
-      </label>
-      <label class="fila-checkbox">
-        <input type="checkbox" name="sacramento_confirmacion" value="Sí"> Confirmación
-      </label>
-    </div>
-  </div>
-
-  <div class="pregunta-si-no" data-condicional="enfermedadEspecificar">
-    <label>¿Padece alguna enfermedad?</label>
-    <div class="fila-radio-si-no">
-      <label><input type="radio" name="enfermedad_padece" value="Sí" required> Sí</label>
-      <label><input type="radio" name="enfermedad_padece" value="No"> No</label>
-    </div>
-    <input type="text" id="enfermedadEspecificar" name="enfermedad_especificar" placeholder="¿Cuál?" class="campo-condicional" hidden>
-  </div>
-
-  <div class="pregunta-si-no" data-condicional="medicamentoEspecificar">
-    <label>¿Toma algún medicamento?</label>
-    <div class="fila-radio-si-no">
-      <label><input type="radio" name="medicamento_toma" value="Sí" required> Sí</label>
-      <label><input type="radio" name="medicamento_toma" value="No"> No</label>
-    </div>
-    <input type="text" id="medicamentoEspecificar" name="medicamento_especificar" placeholder="¿Cuál?" class="campo-condicional" hidden>
-  </div>
-
-  <div class="pregunta-si-no" data-condicional="alergiaEspecificar">
-    <label>¿Es alérgico a algo?</label>
-    <div class="fila-radio-si-no">
-      <label><input type="radio" name="alergia_tiene" value="Sí" required> Sí</label>
-      <label><input type="radio" name="alergia_tiene" value="No"> No</label>
-    </div>
-    <input type="text" id="alergiaEspecificar" name="alergia_especificar" placeholder="¿A qué?" class="campo-condicional" hidden>
-  </div>
-
-  </div>
-
-  <div class="paso-formulario" data-paso="3">
-
-  <h3 class="subtitulo-formulario">Datos del padre</h3>
-
-  <div>
-    <label for="padreNombre">Nombre completo del padre</label>
-    <input type="text" id="padreNombre" name="padre_nombre">
-  </div>
-
-  <div>
-    <label for="padreTelefono">Teléfono del padre</label>
-    <input type="tel" id="padreTelefono" name="padre_telefono">
-    <label class="fila-checkbox">
-      <input type="checkbox" name="padre_whatsapp" value="Sí">
-      Este número tiene WhatsApp
-    </label>
-  </div>
-
-  <h3 class="subtitulo-formulario">Datos de la madre</h3>
-
-  <div>
-    <label for="madreNombre">Nombre completo de la madre</label>
-    <input type="text" id="madreNombre" name="madre_nombre">
-  </div>
-
-  <div>
-    <label for="madreTelefono">Teléfono de la madre</label>
-    <input type="tel" id="madreTelefono" name="madre_telefono">
-    <label class="fila-checkbox">
-      <input type="checkbox" name="madre_whatsapp" value="Sí">
-      Este número tiene WhatsApp
-    </label>
-  </div>
-
-  </div>
-
-  <div class="paso-formulario" data-paso="4">
-
-  <div class="campo-paquetes">
-    <label>Paquete de interés</label>
-    <div class="selector-paquetes" id="selectorPaquetes" role="radiogroup" aria-label="Selecciona tu paquete"></div>
-    <input type="hidden" id="paquete" name="paquete" required>
-  </div>
-
-  <div>
-    <label for="mensaje">Mensaje (opcional)</label>
-    <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos si vienes solo, con tu grupo, si es tu primer campamento..."></textarea>
-  </div>
-
-  </div>
-
-  <div class="controles-paso">
-    <button type="button" class="boton boton-fantasma" id="botonAtras" hidden>← Atrás</button>
-    <button type="button" class="boton boton-ascua" id="botonSiguiente">Siguiente →</button>
-    <button type="submit" class="boton boton-ascua" id="botonEnviar" hidden>Enviar inscripción</button>
-  </div>
-  <p id="estadoFormulario" style="font-size:0.9rem;"></p>
-</form>
-  </div>
-</section>
-
-<footer class="pie">
-  <div class="contenedor pie-fila">
-    <span>Pastoral Juvenil — Parroquia San Joaquín, Villa Canales</span>
-    <span id="pieRedes"></span>
-  </div>
-</footer>
-
-<script src="js/main.js"></script>
-<script src="js/pasos-formulario.js"></script>
-<script src="js/interacciones.js"></script>
-</body>
-</html>
+// --- Menú móvil ---
+document.getElementById("botonMenu")?.addEventListener("click", () => {
+  const nav = document.getElementById("navEnlaces");
+  const abierto = nav.classList.toggle("abierto");
+  document.getElementById("botonMenu").setAttribute("aria-expanded", abierto);
+});

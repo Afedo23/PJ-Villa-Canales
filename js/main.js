@@ -339,7 +339,7 @@ function iniciarCarruselTestimonios(testimonios) {
   }
   document.getElementById("pieRedes").innerHTML = `<div class="fila-iconos-contacto">${redes.join("")}</div>`;
 
-  // --- Formulario: envía a Formspree ---
+  // --- Formulario: envía a la hoja central (Google Apps Script) ---
   const form = document.getElementById("formularioContacto");
   const estado = document.getElementById("estadoFormulario");
 
@@ -369,32 +369,32 @@ function iniciarCarruselTestimonios(testimonios) {
       return;
     }
 
-    if (!site.formspreeEndpoint || site.formspreeEndpoint.startsWith("REEMPLAZAR")) {
-      estado.textContent = "El formulario todavía no está conectado. Configura formspreeEndpoint en data/site.json.";
+    if (!site.inscripcionEndpoint || site.inscripcionEndpoint.startsWith("REEMPLAZAR")) {
+      estado.textContent = "El formulario todavía no está conectado. Configura inscripcionEndpoint en data/site.json.";
       return;
     }
 
-    estado.textContent = "Enviando...";
+    const botonEnviar = document.getElementById("botonEnviar");
+    botonEnviar.disabled = true;   // evita enviar dos veces la misma inscripción
+    estado.textContent = "Enviando tu inscripción...";
 
-    const datos = new FormData(form);
-    // Forzar el valor del paquete por si el hidden no se incluye
-    datos.set("paquete", paqueteOculto.value);
-    // Formspree necesita _replyto para saber a quién responder
-    if (site.contacto.correo) datos.set("_replyto", site.contacto.correo);
+    // Las casillas sin marcar no se envían; el servidor las toma como "No"
+    const datos = Object.fromEntries(new FormData(form).entries());
+    datos.paquete = paqueteOculto.value;
 
     try {
-      const respuesta = await fetch(site.formspreeEndpoint, {
+      const respuesta = await fetch(site.inscripcionEndpoint, {
         method: "POST",
-        headers: { Accept: "application/json" },
-        body: datos,
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(datos),
       });
-
-      console.log("Status:", respuesta.status);
       const json = await respuesta.json();
-      console.log("Respuesta Formspree:", json);
 
-      if (respuesta.ok) {
-        estado.textContent = "¡Gracias! Tu inscripción fue enviada.";
+      if (json.ok) {
+        // OJO: pasos-formulario.js busca la palabra "Gracias" para lanzar el confeti
+        estado.textContent = json.id
+          ? `¡Gracias! Tu inscripción fue enviada. Tu ID de campista es ${json.id}. Revisa tu correo: ahí te llega tu ficha.`
+          : "¡Gracias! Tu inscripción fue enviada.";
         form.reset();
         selectorPaquetes?.querySelectorAll(".boton-paquete").forEach(b => {
           b.classList.remove("activo");
@@ -402,11 +402,13 @@ function iniciarCarruselTestimonios(testimonios) {
         });
         paqueteOculto.value = "";
       } else {
-        estado.textContent = "Error: " + (json.error || "revisa la consola");
+        estado.textContent = "No se pudo enviar: " + (json.error || "intenta de nuevo.");
       }
     } catch (err) {
       console.error("Error al enviar:", err);
-      estado.textContent = "Hubo un problema al enviar. Revisa la consola.";
+      estado.textContent = "Hubo un problema al enviar. Revisa tu conexión e intenta de nuevo.";
+    } finally {
+      botonEnviar.disabled = false;
     }
   });
 })();
