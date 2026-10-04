@@ -120,11 +120,22 @@
     <form class="formulario" id="formularioContacto">
   <input type="hidden" id="fechaInscripcion" name="fecha_inscripcion">
 
+  <!-- Trampa para robots: las personas no ven ni llenan este campo -->
+  <div style="position:absolute; left:-9999px;" aria-hidden="true">
+    <label for="sitioWeb">No llenar este campo</label>
+    <input type="text" id="sitioWeb" name="sitio_web" tabindex="-1" autocomplete="off">
+  </div>
+
   <div class="paso-formulario activo" data-paso="1">
 
   <div>
-    <label for="nombre">Nombre completo</label>
-    <input type="text" id="nombre" name="nombre" required>
+    <label for="nombres">Nombres</label>
+    <input type="text" id="nombres" name="nombres" required autocomplete="given-name">
+  </div>
+
+  <div>
+    <label for="apellidos">Apellidos</label>
+    <input type="text" id="apellidos" name="apellidos" required autocomplete="family-name">
   </div>
 
   <div>
@@ -229,8 +240,13 @@
   <h3 class="subtitulo-formulario">Datos del padre</h3>
 
   <div>
-    <label for="padreNombre">Nombre completo del padre</label>
-    <input type="text" id="padreNombre" name="padre_nombre">
+    <label for="padreNombres">Nombres del padre</label>
+    <input type="text" id="padreNombres" name="padre_nombres">
+  </div>
+
+  <div>
+    <label for="padreApellidos">Apellidos del padre</label>
+    <input type="text" id="padreApellidos" name="padre_apellidos">
   </div>
 
   <div>
@@ -245,8 +261,13 @@
   <h3 class="subtitulo-formulario">Datos de la madre</h3>
 
   <div>
-    <label for="madreNombre">Nombre completo de la madre</label>
-    <input type="text" id="madreNombre" name="madre_nombre">
+    <label for="madreNombres">Nombres de la madre</label>
+    <input type="text" id="madreNombres" name="madre_nombres">
+  </div>
+
+  <div>
+    <label for="madreApellidos">Apellidos de la madre</label>
+    <input type="text" id="madreApellidos" name="madre_apellidos">
   </div>
 
   <div>
