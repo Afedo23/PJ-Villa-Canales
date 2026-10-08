@@ -33,7 +33,9 @@
       {
         "nombre": "Paquete Actualízate",
         "precio": "Q500",
-        "incluye": ["Alimentación", "Materiales", "Transporte", "Hospedaje: Cabaña"]
+        "incluye": ["Alimentación", "Materiales", "Transporte", "Hospedaje: Cabaña"],
+           "agotadoPara": ["Femenino"],
+   "avisoCupo": "Cupo agotado para mujeres. Quedan 2 lugares para hombres.",
       }
     ],
     "fotos": [

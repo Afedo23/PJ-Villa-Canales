@@ -3,9 +3,25 @@
 // campamentos, edita esos dos archivos JSON — no hace falta
 // tocar este código.
 
-// Alerta que se muestra cada vez que alguien intenta elegir un paquete con cupo agotado
-function avisarCupoAgotado(paq) {
-  alert(`Lo sentimos: el cupo del ${paq.nombre} llegó a su capacidad máxima.\n\nPuedes elegir otro de los paquetes disponibles.`);
+// ¿Está agotado este paquete para esta persona?
+//   agotado: true            → agotado para todos
+//   agotadoPara: ["Femenino"] → agotado solo para ese sexo
+function paqueteAgotado(paq, sexo) {
+  if (paq.agotado) return true;
+  return Array.isArray(paq.agotadoPara) && !!sexo && paq.agotadoPara.includes(sexo);
+}
+
+// Sexo elegido en el formulario ("Masculino", "Femenino" o "" si aún no elige)
+function sexoElegido() {
+  const marcado = document.querySelector('input[name="sexo"]:checked');
+  return marcado ? marcado.value : "";
+}
+
+// Alerta que se muestra cada vez que alguien intenta elegir un paquete sin cupo
+function avisarCupoAgotado(paq, sexo) {
+  let para = "";
+  if (!paq.agotado) para = sexo === "Femenino" ? " para mujeres" : sexo === "Masculino" ? " para hombres" : "";
+  alert(`Lo sentimos: el cupo del ${paq.nombre}${para} llegó a su capacidad máxima.\n\nPuedes elegir otro de los paquetes disponibles.`);
 }
 
 async function cargarJSON(ruta) {
@@ -193,6 +209,28 @@ function iniciarCarruselTestimonios(testimonios) {
   // --- Referencias globales que usa también el formulario ---
   const selectorPaquetes = document.getElementById("selectorPaquetes");
   const paqueteOculto = document.getElementById("paquete");
+  const botonesPaquete = [];   // { paq, btn } de los botones del formulario
+
+  // Habilita o bloquea los paquetes según el sexo elegido
+  function actualizarDisponibilidadPaquetes(avisar) {
+    const sexo = sexoElegido();
+    botonesPaquete.forEach(({ paq, btn }) => {
+      const agotado = paqueteAgotado(paq, sexo);
+      btn.classList.toggle("agotado", agotado);
+      if (agotado) btn.setAttribute("aria-disabled", "true");
+      else btn.removeAttribute("aria-disabled");
+      const etiqueta = btn.querySelector(".etiqueta-agotado");
+      if (etiqueta) etiqueta.hidden = !agotado;
+
+      // Si ya lo había elegido y ahora no está disponible, se desmarca y se avisa
+      if (agotado && paqueteOculto.value === paq.nombre) {
+        paqueteOculto.value = "";
+        btn.classList.remove("activo");
+        btn.setAttribute("aria-checked", "false");
+        if (avisar) avisarCupoAgotado(paq, sexo);
+      }
+    });
+  }
 
   // --- Hero: campamento marcado como actual (o el más reciente) ---
   const actual = campamentos.find(c => c.esActual) ||
@@ -253,15 +291,12 @@ function iniciarCarruselTestimonios(testimonios) {
         btn.innerHTML = `
           <span class="nombre-paquete">${paq.nombre}</span>
           <span class="precio-paquete">${paq.precio}</span>
-          ${paq.agotado ? '<span class="etiqueta-agotado">Cupo agotado</span>' : ""}
+          <span class="etiqueta-agotado" hidden>Cupo agotado</span>
         `;
-        if (paq.agotado) {
-          btn.classList.add("agotado");
-          btn.setAttribute("aria-disabled", "true");
-        }
         btn.addEventListener("click", () => {
-          if (paq.agotado) {            // no se puede elegir: solo avisa
-            avisarCupoAgotado(paq);
+          const sexo = sexoElegido();
+          if (paqueteAgotado(paq, sexo)) {      // no se puede elegir: solo avisa
+            avisarCupoAgotado(paq, sexo);
             return;
           }
           selectorPaquetes.querySelectorAll(".boton-paquete").forEach(b => {
@@ -273,7 +308,9 @@ function iniciarCarruselTestimonios(testimonios) {
           paqueteOculto.value = paq.nombre;
         });
         selectorPaquetes.appendChild(btn);
+        botonesPaquete.push({ paq, btn });
       });
+      actualizarDisponibilidadPaquetes(false);
     }
 
     // 2) Tarjetas de precio con botón "Inscribirme"
@@ -284,18 +321,21 @@ function iniciarCarruselTestimonios(testimonios) {
         card.innerHTML = `
           ${paq.agotado
             ? '<span class="precio-etiqueta">Cupo agotado</span>'
-            : (i === 1 ? '<span class="precio-etiqueta">Más elegido</span>' : "")}
+            : (paq.agotadoPara ? '<span class="precio-etiqueta">Últimos cupos</span>'
+              : (i === 1 ? '<span class="precio-etiqueta">Más elegido</span>' : ""))}
           <h3>${paq.nombre}</h3>
           <p class="precio-monto">${paq.precio}</p>
+          ${paq.avisoCupo ? `<p class="aviso-cupo">${paq.avisoCupo}</p>` : ""}
           <ul>${paq.incluye.map(item => `<li>${item}</li>`).join("")}</ul>
           <a href="#contacto" class="boton boton-ascua" data-paquete="${paq.nombre}"${paq.agotado ? ' aria-disabled="true"' : ""}>${paq.agotado ? "Cupo agotado" : "Inscribirme"}</a>
         `;
         preciosGrid.appendChild(card);
 
         card.querySelector("[data-paquete]").addEventListener("click", (evento) => {
-          if (paq.agotado) {            // botón "deshabilitado": no navega y avisa
+          const sexo = sexoElegido();
+          if (paqueteAgotado(paq, sexo)) {      // sin cupo: no navega y avisa
             evento.preventDefault();
-            avisarCupoAgotado(paq);
+            avisarCupoAgotado(paq, sexo);
             return;
           }
           if (!selectorPaquetes || !paqueteOculto) return;
@@ -381,6 +421,11 @@ function iniciarCarruselTestimonios(testimonios) {
     });
   });
 
+  // Al cambiar el sexo se habilitan o bloquean los paquetes
+  document.querySelectorAll('input[name="sexo"]').forEach(radio => {
+    radio.addEventListener("change", () => actualizarDisponibilidadPaquetes(true));
+  });
+
   form.addEventListener("submit", async (evento) => {
     evento.preventDefault();
 
@@ -391,8 +436,8 @@ function iniciarCarruselTestimonios(testimonios) {
     }
 
     const paqueteElegido = ((actual && actual.paquetes) || []).find(p => p.nombre === paqueteOculto.value);
-    if (paqueteElegido && paqueteElegido.agotado) {
-      avisarCupoAgotado(paqueteElegido);
+    if (paqueteElegido && paqueteAgotado(paqueteElegido, sexoElegido())) {
+      avisarCupoAgotado(paqueteElegido, sexoElegido());
       return;
     }
 
@@ -428,6 +473,7 @@ function iniciarCarruselTestimonios(testimonios) {
           b.setAttribute("aria-checked", "false");
         });
         paqueteOculto.value = "";
+        actualizarDisponibilidadPaquetes(false);
       } else {
         estado.textContent = "No se pudo enviar: " + (json.error || "intenta de nuevo.");
       }
