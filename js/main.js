@@ -3,6 +3,11 @@
 // campamentos, edita esos dos archivos JSON — no hace falta
 // tocar este código.
 
+// Alerta que se muestra cada vez que alguien intenta elegir un paquete con cupo agotado
+function avisarCupoAgotado(paq) {
+  alert(`Lo sentimos: el cupo del ${paq.nombre} llegó a su capacidad máxima.\n\nPuedes elegir otro de los paquetes disponibles.`);
+}
+
 async function cargarJSON(ruta) {
   const respuesta = await fetch(ruta);
   return respuesta.json();
@@ -98,7 +103,7 @@ function iniciarRevelado() {
         observador.unobserve(entrada.target);
       }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0, rootMargin: "0px 0px -8% 0px" });
   elementos.forEach(el => observador.observe(el));
 }
 
@@ -248,8 +253,17 @@ function iniciarCarruselTestimonios(testimonios) {
         btn.innerHTML = `
           <span class="nombre-paquete">${paq.nombre}</span>
           <span class="precio-paquete">${paq.precio}</span>
+          ${paq.agotado ? '<span class="etiqueta-agotado">Cupo agotado</span>' : ""}
         `;
+        if (paq.agotado) {
+          btn.classList.add("agotado");
+          btn.setAttribute("aria-disabled", "true");
+        }
         btn.addEventListener("click", () => {
+          if (paq.agotado) {            // no se puede elegir: solo avisa
+            avisarCupoAgotado(paq);
+            return;
+          }
           selectorPaquetes.querySelectorAll(".boton-paquete").forEach(b => {
             b.classList.remove("activo");
             b.setAttribute("aria-checked", "false");
@@ -266,17 +280,24 @@ function iniciarCarruselTestimonios(testimonios) {
     if (preciosGrid && paquetes.length > 0) {
       paquetes.forEach((paq, i) => {
         const card = document.createElement("div");
-        card.className = "precio-card" + (i === 1 ? " destacado" : "");
+        card.className = "precio-card" + (i === 1 ? " destacado" : "") + (paq.agotado ? " agotado" : "");
         card.innerHTML = `
-          ${i === 1 ? '<span class="precio-etiqueta">Más elegido</span>' : ""}
+          ${paq.agotado
+            ? '<span class="precio-etiqueta">Cupo agotado</span>'
+            : (i === 1 ? '<span class="precio-etiqueta">Más elegido</span>' : "")}
           <h3>${paq.nombre}</h3>
           <p class="precio-monto">${paq.precio}</p>
           <ul>${paq.incluye.map(item => `<li>${item}</li>`).join("")}</ul>
-          <a href="#contacto" class="boton boton-ascua" data-paquete="${paq.nombre}">Inscribirme</a>
+          <a href="#contacto" class="boton boton-ascua" data-paquete="${paq.nombre}"${paq.agotado ? ' aria-disabled="true"' : ""}>${paq.agotado ? "Cupo agotado" : "Inscribirme"}</a>
         `;
         preciosGrid.appendChild(card);
 
-        card.querySelector("[data-paquete]").addEventListener("click", () => {
+        card.querySelector("[data-paquete]").addEventListener("click", (evento) => {
+          if (paq.agotado) {            // botón "deshabilitado": no navega y avisa
+            evento.preventDefault();
+            avisarCupoAgotado(paq);
+            return;
+          }
           if (!selectorPaquetes || !paqueteOculto) return;
           selectorPaquetes.querySelectorAll(".boton-paquete").forEach(b => {
             const coincide = b.dataset.valor === paq.nombre;
@@ -366,6 +387,12 @@ function iniciarCarruselTestimonios(testimonios) {
     // Validar paquete
     if (!paqueteOculto || !paqueteOculto.value) {
       estado.textContent = "Por favor elige un paquete antes de enviar.";
+      return;
+    }
+
+    const paqueteElegido = ((actual && actual.paquetes) || []).find(p => p.nombre === paqueteOculto.value);
+    if (paqueteElegido && paqueteElegido.agotado) {
+      avisarCupoAgotado(paqueteElegido);
       return;
     }
 

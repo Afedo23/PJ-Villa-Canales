@@ -1700,3 +1700,50 @@ html.cursor-personalizado textarea {
   .formulario .fila-radio-si-no label { padding: 9px 22px; }
   .formulario .boton { padding: 12px 20px; }
 }
+
+/* ============================================================
+   PAQUETE CON CUPO AGOTADO
+   ============================================================ */
+
+/* Tarjeta de precios */
+.precio-card.agotado { opacity: 0.8; }
+.precio-card.agotado:hover {
+  transform: none;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: none;
+}
+.precio-card.agotado h3 { color: #8a8178; }
+.precio-card.agotado .precio-monto { color: #a39a8f; text-decoration: line-through; }
+.precio-card.agotado .precio-etiqueta { background: #8a8178; }
+.precio-card.agotado ul li::before { color: #b7aea3; }
+
+/* Botón "deshabilitado" (sigue recibiendo el clic para mostrar la alerta) */
+.boton[aria-disabled="true"],
+.boton[aria-disabled="true"]:hover {
+  background: #b9b1a6;
+  color: #fff;
+  cursor: not-allowed;
+}
+.boton[aria-disabled="true"]:active { transform: none; }
+
+/* Selector de paquetes del formulario */
+.formulario .boton-paquete.agotado {
+  opacity: 0.62;
+  border-style: dashed;
+  cursor: not-allowed;
+}
+.formulario .boton-paquete.agotado:hover {
+  transform: none;
+  border-color: var(--f-borde);
+}
+.formulario .boton-paquete.agotado .precio-paquete {
+  color: #8a8178;
+  text-decoration: line-through;
+}
+.boton-paquete .etiqueta-agotado {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #b3261e;
+}
