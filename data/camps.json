@@ -9,16 +9,13 @@
     "descripcion": "Kerigma es el encuentro de uno mismo desde la esencia que Dios nos da, al encontrarnos a nosotros mismos, ponemos a disposición de los demás nuestros dones y al mismo tiempo tengamos una relación genuina con Dios en el servicio a los otros, siempre siendo seres libres y auténticos.",
     "lugar": "Entre Nubes y Montañas, Km 39.5, carretera a Mataquescuintla, desvío a Sanguayabá. Finca Las Nubes, San José Pinula",
     "fechasPago": [
-      { "fecha": "27 de Septimebre", "detalle": "Reservar Cupo" },
-      { "fecha": "4 de Octubre", "detalle": "Reservar Cupo" },
-      { "fecha": "18 de Octubre", "detalle": "Primer Abono" },
+      { "fecha": "18 de Octubre", "detalle": "Reserva Cupo" },
       { "fecha": "25 de Octubre", "detalle": "Primer Abono" },
       { "fecha": "1 de Noviembre", "detalle": "Segundo Abono" },
       { "fecha": "8 de Noviembre", "detalle": "Segundo Abono" },
-      { "fecha": "15 de Noviembre", "detalle": "Abono Final" },
-      { "fecha": "22 de Noviembre", "detalle": "Abono Final" }
+      { "fecha": "15 de Noviembre", "detalle": "Abono Final" }
     ],
-    "montoReserva": "Q150",
+    "montoReserva": "Q100",
     "paquetes": [
       {
         "nombre": "Paquete Reiníciate",
@@ -33,9 +30,8 @@
       {
         "nombre": "Paquete Actualízate",
         "precio": "Q500",
-        "incluye": ["Alimentación", "Materiales", "Transporte", "Hospedaje: Cabaña"],
-           "agotadoPara": ["Femenino"],
-           "avisoCupo": "Cupo agotado para mujeres. Quedan 2 lugares para hombres."
+        "agotado": true,
+        "incluye": ["Alimentación", "Materiales", "Transporte", "Hospedaje: Cabaña"]
       }
     ],
     "fotos": [
