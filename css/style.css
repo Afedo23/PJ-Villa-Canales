@@ -1803,3 +1803,33 @@ html.cursor-personalizado textarea {
   line-height: 1.35;
   color: var(--ascua);
 }
+
+/* ============================================================
+   GÉNERO Y TIPO: cada opción tiene su color (con la misma transición del resto)
+   ============================================================ */
+.formulario .fila-radio-opciones label:has(input[value="Masculino"]:checked) {
+  background: #bde3ff;                       /* celeste pastel */
+  color: #0f3b5c;
+  box-shadow: 0 4px 12px rgba(110, 185, 235, 0.55);
+}
+.formulario .fila-radio-opciones label:has(input[value="Femenino"]:checked) {
+  background: #ffc5d3;                       /* rosa pastel */
+  color: #7a1f3d;
+  box-shadow: 0 4px 12px rgba(255, 140, 170, 0.5);
+}
+.formulario .fila-radio-opciones label:has(input[value="Campista"]:checked) {
+  background: #ffd84d;                       /* amarillo */
+  color: #3b2f00;
+  box-shadow: 0 4px 12px rgba(235, 185, 15, 0.55);
+}
+.formulario .fila-radio-opciones label:has(input[value="Servidor"]:checked) {
+  background: #111111;                       /* negro */
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Símbolo que aparece al elegir la opción */
+.formulario .fila-radio-opciones label:has(input[value="Masculino"]:checked)::before { content: "♂"; margin-right: 8px; }
+.formulario .fila-radio-opciones label:has(input[value="Femenino"]:checked)::before  { content: "♀"; margin-right: 8px; }
+.formulario .fila-radio-opciones label:has(input[value="Campista"]:checked)::before  { content: "✓"; margin-right: 8px; }
+.formulario .fila-radio-opciones label:has(input[value="Servidor"]:checked)::before  { content: "✓"; margin-right: 8px; }

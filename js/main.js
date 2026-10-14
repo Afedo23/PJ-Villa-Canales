@@ -24,6 +24,53 @@ function avisarCupoAgotado(paq, sexo) {
   alert(`Lo sentimos: el cupo del ${paq.nombre}${para} llegó a su capacidad máxima.\n\nPuedes elegir otro de los paquetes disponibles.`);
 }
 
+function normalizarTexto(texto) {
+  return String(texto).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+
+// Le pregunta al servidor cuántos cupos quedan por paquete y género (devuelve null si no se puede)
+async function cargarCupos(site) {
+  if (!site.inscripcionEndpoint || site.inscripcionEndpoint.startsWith("REEMPLAZAR")) return null;
+  try {
+    const respuesta = await fetch(site.inscripcionEndpoint + "?cupos=1&t=" + Date.now());
+    const json = await respuesta.json();
+    return json && json.ok ? json.cupos : null;
+  } catch (error) {
+    console.warn("No se pudieron leer los cupos:", error);
+    return null;
+  }
+}
+
+// Ajusta los paquetes con lo que informa el servidor:
+//  - sin lugares para nadie  → agotado
+//  - lugares solo para un género → se bloquea para el otro y se muestra cuántos quedan
+function aplicarCupos(paquetes, cupos) {
+  paquetes.forEach(paq => {
+    const clave = Object.keys(cupos).find(k => normalizarTexto(paq.nombre).includes(normalizarTexto(k)));
+    if (!clave) return;
+
+    const hombres = Number(cupos[clave].Masculino) || 0;
+    const mujeres = Number(cupos[clave].Femenino) || 0;
+
+    if (hombres <= 0 && mujeres <= 0) {
+      paq.agotado = true;
+      delete paq.agotadoPara;
+      delete paq.avisoCupo;
+      return;
+    }
+
+    paq.agotado = false;
+    paq.agotadoPara = [];
+    if (hombres <= 0) paq.agotadoPara.push("Masculino");
+    if (mujeres <= 0) paq.agotadoPara.push("Femenino");
+
+    const partes = [];
+    if (hombres > 0) partes.push(`${hombres} para ${hombres === 1 ? "hombre" : "hombres"}`);
+    if (mujeres > 0) partes.push(`${mujeres} para ${mujeres === 1 ? "mujer" : "mujeres"}`);
+    paq.avisoCupo = "Últimos lugares: " + partes.join(" y ") + ".";
+  });
+}
+
 async function cargarJSON(ruta) {
   const respuesta = await fetch(ruta);
   return respuesta.json();
@@ -200,11 +247,12 @@ function iniciarCarruselTestimonios(testimonios) {
   }
 }
 
-(async function iniciar() {
+async function iniciarPagina() {
   const [site, campamentos] = await Promise.all([
     cargarJSON("data/site.json"),
     cargarJSON("data/camps.json"),
   ]);
+  const promesaCupos = cargarCupos(site);   // se pide en paralelo; la página no espera por ella
 
   // --- Referencias globales que usa también el formulario ---
   const selectorPaquetes = document.getElementById("selectorPaquetes");
@@ -279,6 +327,12 @@ function iniciarCarruselTestimonios(testimonios) {
 
     const paquetes = actual.paquetes || [];
 
+    // Dibuja (o vuelve a dibujar) los botones del formulario y las tarjetas de precio
+    function pintarPaquetes() {
+      if (selectorPaquetes) selectorPaquetes.innerHTML = "";
+      if (preciosGrid) preciosGrid.innerHTML = "";
+      botonesPaquete.length = 0;
+
     // 1) Botones del formulario
     if (selectorPaquetes && paquetes.length > 0) {
       paquetes.forEach(paq => {
@@ -348,6 +402,25 @@ function iniciarCarruselTestimonios(testimonios) {
         });
       });
     }
+
+      // Conservar el paquete que ya hubiera elegido la persona
+      botonesPaquete.forEach(({ paq, btn }) => {
+        if (paqueteOculto.value === paq.nombre) {
+          btn.classList.add("activo");
+          btn.setAttribute("aria-checked", "true");
+        }
+      });
+      actualizarDisponibilidadPaquetes(false);
+    }
+
+    pintarPaquetes();
+
+    // Cuando el servidor responda, se actualizan los cupos reales (si no responde, se queda lo de camps.json)
+    promesaCupos.then(cupos => {
+      if (!cupos) return;
+      aplicarCupos(paquetes, cupos);
+      pintarPaquetes();
+    });
 
     // 3) Info de fechas, reserva y lugar
     if (preciosInfo) {
@@ -484,7 +557,23 @@ function iniciarCarruselTestimonios(testimonios) {
       botonEnviar.disabled = false;
     }
   });
-})();
+}
+
+// Si algo falla al cargar (por ejemplo un error de coma en data/camps.json), la página no se queda en blanco:
+// las secciones se muestran y aparece un aviso con el motivo del error.
+function manejarErrorInicio(error) {
+  console.error("No se pudo iniciar la página:", error);
+  document.querySelectorAll(".revelar").forEach(el => el.classList.add("visible"));
+
+  const aviso = document.createElement("p");
+  aviso.style.cssText = "background:#fdecea;color:#7a1f17;padding:12px 16px;margin:0;text-align:center;font-size:0.9rem;position:relative;z-index:10000;";
+  aviso.textContent = "No se pudieron cargar los datos de la página (" +
+    (error && error.message ? error.message : "error desconocido") +
+    "). Revisa los archivos data/camps.json y data/site.json.";
+  document.body.prepend(aviso);
+}
+
+iniciarPagina().catch(manejarErrorInicio);
 
 // --- Menú móvil ---
 document.getElementById("botonMenu")?.addEventListener("click", () => {
