@@ -41,21 +41,28 @@ async function cargarCupos(site) {
   }
 }
 
-// Ajusta los paquetes con lo que informa el servidor:
-//  - sin lugares para nadie  → agotado
-//  - lugares solo para un género → se bloquea para el otro y se muestra cuántos quedan
+// Ajusta los paquetes con lo que informa el servidor. Para cada paquete puede venir:
+//   Total                 → lugares que quedan en total
+//   Masculino / Femenino  → lugares que quedan por género
+// Sin lugares para nadie → agotado. Lugares solo para un género → se bloquea para el otro.
 function aplicarCupos(paquetes, cupos) {
   paquetes.forEach(paq => {
     const clave = Object.keys(cupos).find(k => normalizarTexto(paq.nombre).includes(normalizarTexto(k)));
     if (!clave) return;
 
-    const hombres = Number(cupos[clave].Masculino) || 0;
-    const mujeres = Number(cupos[clave].Femenino) || 0;
+    const d = cupos[clave];
+    const hayTotal = d.Total !== undefined;
+    const hayGenero = d.Masculino !== undefined || d.Femenino !== undefined;
+
+    const total = hayTotal ? Number(d.Total) || 0 : Infinity;
+    const hombres = Math.min(total, hayGenero ? Number(d.Masculino) || 0 : Infinity);
+    const mujeres = Math.min(total, hayGenero ? Number(d.Femenino) || 0 : Infinity);
 
     if (hombres <= 0 && mujeres <= 0) {
       paq.agotado = true;
       delete paq.agotadoPara;
       delete paq.avisoCupo;
+      delete paq.ultimosCupos;
       return;
     }
 
@@ -64,10 +71,18 @@ function aplicarCupos(paquetes, cupos) {
     if (hombres <= 0) paq.agotadoPara.push("Masculino");
     if (mujeres <= 0) paq.agotadoPara.push("Femenino");
 
-    const partes = [];
-    if (hombres > 0) partes.push(`${hombres} para ${hombres === 1 ? "hombre" : "hombres"}`);
-    if (mujeres > 0) partes.push(`${mujeres} para ${mujeres === 1 ? "mujer" : "mujeres"}`);
-    paq.avisoCupo = "Últimos lugares: " + partes.join(" y ") + ".";
+    if (hayGenero) {
+      const partes = [];
+      if (hombres > 0) partes.push(`${hombres} para ${hombres === 1 ? "hombre" : "hombres"}`);
+      if (mujeres > 0) partes.push(`${mujeres} para ${mujeres === 1 ? "mujer" : "mujeres"}`);
+      paq.avisoCupo = "Quedan: " + partes.join(" y ") + ".";
+    } else {
+      paq.avisoCupo = `Quedan ${total} ${total === 1 ? "lugar" : "lugares"}.`;
+    }
+
+    // La etiqueta "Últimos cupos" solo aparece cuando quedan pocos (5 o menos)
+    const menor = Math.min(hombres > 0 ? hombres : Infinity, mujeres > 0 ? mujeres : Infinity);
+    paq.ultimosCupos = menor <= 5;
   });
 }
 
@@ -375,7 +390,7 @@ async function iniciarPagina() {
         card.innerHTML = `
           ${paq.agotado
             ? '<span class="precio-etiqueta">Cupo agotado</span>'
-            : (paq.agotadoPara ? '<span class="precio-etiqueta">Últimos cupos</span>'
+            : (paq.ultimosCupos ? '<span class="precio-etiqueta">Últimos cupos</span>'
               : (i === 1 ? '<span class="precio-etiqueta">Más elegido</span>' : ""))}
           <h3>${paq.nombre}</h3>
           <p class="precio-monto">${paq.precio}</p>
